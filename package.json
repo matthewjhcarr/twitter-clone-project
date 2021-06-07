@@ -1,0 +1,28 @@
+{
+  "name": "twitter-clone-project",
+  "version": "1.0.0",
+  "description": "A twitter clone project written in the MERN stack",
+  "main": "server.js",
+  "repository": "https://github.com/matthewjhcarr/twitter-clone-project",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "author": "Matthew Carr <matthewjhcarr@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.11.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13",
+    "prettier": "^2.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "jest": "^27.0.4",
+    "nodemon": "^2.0.7"
+  }
+}
