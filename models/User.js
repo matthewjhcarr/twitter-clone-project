@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose'
 
 const UserSchema = new Schema({
   name: {
@@ -21,6 +21,6 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   }
-});
+})
 
-module.exports = User = model('user', UserSchema);
+module.exports = User = model('user', UserSchema)
