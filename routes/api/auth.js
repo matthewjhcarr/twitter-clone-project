@@ -1,10 +1,10 @@
-import express from 'express'
-import { compare } from 'bcryptjs'
-import auth from '../../middleware/auth'
-import { sign } from 'jsonwebtoken'
-import config from 'config'
-import { check, validationResult } from 'express-validator'
-import User from '../../models/User'
+const express = require('express')
+const bcrypt = require('bcryptjs')
+const auth = require('../../middleware/auth')
+const jwt = require('jsonwebtoken')
+const config = require('config')
+const { check, validationResult } = require('express-validator')
+const User = require('../../models/User')
 
 const router = express.Router()
 
@@ -48,7 +48,7 @@ router.post(
       }
 
       // Ensure password matches
-      const isMatch = await compare(password, user.password)
+      const isMatch = await bcrypt.compare(password, user.password)
 
       if (!isMatch) {
         return res.status(400).json({
@@ -64,7 +64,7 @@ router.post(
       }
 
       // Sign jwt
-      sign(
+      jwt.sign(
         payload,
         config.get('jwtSecret'),
         // TODO: change this value back to 3600 for production

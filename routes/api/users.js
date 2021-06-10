@@ -1,8 +1,11 @@
-import express from 'express'
-import gravatar from 'gravatar'
-import bcrypt from 'bcryptjs'
-import { check, validationResult } from 'express-validator'
-import User from '../../models/User'
+const express = require('express')
+const gravatar = require('gravatar')
+const bcrypt = require('bcryptjs')
+const { check, validationResult } = require('express-validator')
+const jwt = require('jsonwebtoken')
+const config = require('config')
+const auth = require('../../middleware/auth')
+const User = require('../../models/User')
 
 const router = express.Router()
 
