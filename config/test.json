@@ -1,4 +1,2 @@
 {
-  "mongoURI": "mongodb+srv://Matthew:sfXyVDPtCJvP1Lc5@twitterclone.qaiaq.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "mysecrettoken"
 }

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
-const config = require('config')
-const db = config.get('mongoURI')
+const { mongoURI } = require('../config')
 
 const ERROR_CODE = 1
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true

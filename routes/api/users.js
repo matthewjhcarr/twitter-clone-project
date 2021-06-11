@@ -3,9 +3,9 @@ const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
-const config = require('config')
 const auth = require('../../middleware/auth')
 const User = require('../../models/User')
+const { jwtSecret, jwtExpiration } = require('../../config')
 
 const router = express.Router()
 
@@ -74,9 +74,8 @@ router.post(
 
       jwt.sign(
         payload,
-        // TODO: change these values in production
-        config.get('jwtSecret'),
-        { expiresIn: 360000 },
+        jwtSecret,
+        { expiresIn: jwtExpiration },
         (err, token) => {
           if (err) throw err
           res.json({ token })
