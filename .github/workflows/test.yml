@@ -1,5 +1,7 @@
 name: CI
 
+environment: Testing
+
 on:
   push:
     branches: [ main ]
