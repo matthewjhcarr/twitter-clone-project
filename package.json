@@ -2,7 +2,7 @@
   "name": "twitter-clone-project",
   "version": "1.0.0",
   "description": "A twitter clone project written in the MERN stack",
-  "main": "server.js",
+  "main": "start.js",
   "repository": "https://github.com/matthewjhcarr/twitter-clone-project",
   "scripts": {
     "start": "node server",
@@ -21,6 +21,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.11.1",
     "gravatar": "^1.8.1",
