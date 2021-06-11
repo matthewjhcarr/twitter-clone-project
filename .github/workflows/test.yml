@@ -17,9 +17,9 @@ jobs:
       run: yarn
     - name: Run tests
       env:
-        MONGO_URI: ${{ Testing.MONGO_URI }}
-        TEST_USERS: ${{ Testing.TEST_USERS }}
-        TEST_AUTH: ${{ Testing.TEST_AUTH }}
-        JWT_SECRET: ${{ Testing.JWT_SECRET }}
-        JWT_EXPIRATION: ${{ Testing.JWT_EXPIRATION }}
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        TEST_USERS: ${{ secrets.TEST_USERS }}
+        TEST_AUTH: ${{ secrets.TEST_AUTH }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
       run: yarn test
