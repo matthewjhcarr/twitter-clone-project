@@ -15,9 +15,7 @@ beforeAll(async () => {
 
     console.log('Connected to testAuth')
   } catch (err) {
-    console.error(err.message)
-    // Exit process with failure
-    process.exit(1)
+    console.error(err)
   }
 })
 
