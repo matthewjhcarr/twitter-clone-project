@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: '*'
   pull_request:
-    branches: [ main ]
+    branches: '*'
 
 jobs:
   build:
@@ -13,14 +13,14 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
-    - name: Run tests
-      env:
-        MONGO_URI: ${{ secrets.MONGO_URI }}
-        TEST_USERS: ${{ secrets.TEST_USERS }}
-        TEST_AUTH: ${{ secrets.TEST_AUTH }}
-        JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
-      run: yarn test
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          TEST_USERS: ${{ secrets.TEST_USERS }}
+          TEST_AUTH: ${{ secrets.TEST_AUTH }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
+        run: yarn test
