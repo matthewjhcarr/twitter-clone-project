@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const request = require('supertest')
+const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
 const { testUsers } = require('../../../config')
@@ -29,7 +30,7 @@ afterEach(async () => {
 
 describe('Registration testing', () => {
   it('Should create a test user', async () => {
-    expect.assertions(2)
+    expect.assertions(2) // skipcq: JS-0074
 
     const res = await request(server)
       .post('/api/users')
@@ -39,13 +40,13 @@ describe('Registration testing', () => {
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })
-    expect(res.statusCode).toEqual(200)
+    expect(res.statusCode).toEqual(StatusCodes.OK)
     expect(res.body).toHaveProperty('token')
   })
 
   describe('Test name param', () => {
     it('Should not create a test user without a name', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/users')
@@ -54,7 +55,7 @@ describe('Registration testing', () => {
           email: 'baduser@gmail.com',
           password: 'testpass123'
         })
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Name is required!')
       expect(res.body.errors[0].param).toEqual('name')
@@ -64,7 +65,7 @@ describe('Registration testing', () => {
 
   describe('Test email param', () => {
     it('Should not create a test user without an email', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/users')
@@ -73,7 +74,7 @@ describe('Registration testing', () => {
           name: 'Bad User',
           password: 'testpass123'
         })
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Please include a valid email')
       expect(res.body.errors[0].param).toEqual('email')
@@ -81,7 +82,7 @@ describe('Registration testing', () => {
     })
 
     it('Should not create a test user with an invalid email', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/users')
@@ -91,7 +92,7 @@ describe('Registration testing', () => {
           email: 'baduser',
           password: 'testpass123'
         })
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Please include a valid email')
       expect(res.body.errors[0].param).toEqual('email')
@@ -101,7 +102,7 @@ describe('Registration testing', () => {
 
   describe('Test password param', () => {
     it('Should not create a test user without a password', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/users')
@@ -110,7 +111,7 @@ describe('Registration testing', () => {
           name: 'Bad User',
           email: 'baduser@gmail.com'
         })
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual(
         'Please enter a password with 6 or more characters'
@@ -120,7 +121,7 @@ describe('Registration testing', () => {
     })
 
     it('Should not create a test user with an invalid password', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/users')
@@ -130,7 +131,7 @@ describe('Registration testing', () => {
           email: 'baduser@gmail.com',
           password: '1234'
         })
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual(
         'Please enter a password with 6 or more characters'
@@ -158,12 +159,12 @@ describe('Delete user testing', () => {
   })
 
   it('Should delete the test user', async () => {
-    expect.assertions(2)
+    expect.assertions(2) // skipcq: JS-0074
 
     const res = await request(server)
       .delete('/api/users')
       .set('x-auth-token', token)
-    expect(res.statusCode).toEqual(200)
+    expect(res.statusCode).toEqual(StatusCodes.OK)
     expect(res.body.msg).toEqual('User deleted')
   })
 })
