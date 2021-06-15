@@ -29,7 +29,7 @@ afterEach(async () => {
 })
 
 beforeAll(async () => {
-  const res = await request(server)
+  await request(server)
     .post('/api/users')
     .set('Content-Type', 'application/json')
     .send({
