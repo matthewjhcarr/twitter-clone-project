@@ -5,8 +5,8 @@
   "main": "start.js",
   "repository": "https://github.com/matthewjhcarr/twitter-clone-project",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
+    "start": "node start",
+    "server": "nodemon start",
     "test": "jest"
   },
   "jest": {

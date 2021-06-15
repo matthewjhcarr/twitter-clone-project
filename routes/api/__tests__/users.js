@@ -27,36 +27,143 @@ afterEach(async () => {
   await User.deleteMany()
 })
 
-it('Should create a test user', async () => {
-  expect.assertions(2)
+describe('Registration testing', () => {
+  it('Should create a test user', async () => {
+    expect.assertions(2)
 
-  const res = await request(server)
-    .post('/api/users')
-    .set('Content-Type', 'application/json')
-    .send({
-      name: 'Test User',
-      email: 'testuser@gmail.com',
-      password: 'testpass123'
+    const res = await request(server)
+      .post('/api/users')
+      .set('Content-Type', 'application/json')
+      .send({
+        name: 'Test User',
+        email: 'testuser@gmail.com',
+        password: 'testpass123'
+      })
+    expect(res.statusCode).toEqual(200)
+    expect(res.body).toHaveProperty('token')
+  })
+
+  describe('Test name param', () => {
+    it('Should not create a test user without a name', async () => {
+      expect.assertions(5)
+
+      const res = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          email: 'baduser@gmail.com',
+          password: 'testpass123'
+        })
+      expect(res.statusCode).toEqual(400)
+      expect(res.body).not.toHaveProperty('token')
+      expect(res.body.errors[0].msg).toEqual('Name is required!')
+      expect(res.body.errors[0].param).toEqual('name')
+      expect(res.body.errors[0].location).toEqual('body')
     })
-  expect(res.statusCode).toEqual(200)
-  expect(res.body).toHaveProperty('token')
+  })
+
+  describe('Test email param', () => {
+    it('Should not create a test user without an email', async () => {
+      expect.assertions(5)
+
+      const res = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'Bad User',
+          password: 'testpass123'
+        })
+      expect(res.statusCode).toEqual(400)
+      expect(res.body).not.toHaveProperty('token')
+      expect(res.body.errors[0].msg).toEqual('Please include a valid email')
+      expect(res.body.errors[0].param).toEqual('email')
+      expect(res.body.errors[0].location).toEqual('body')
+    })
+
+    it('Should not create a test user with an invalid email', async () => {
+      expect.assertions(5)
+
+      const res = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'Bad User',
+          email: 'baduser',
+          password: 'testpass123'
+        })
+      expect(res.statusCode).toEqual(400)
+      expect(res.body).not.toHaveProperty('token')
+      expect(res.body.errors[0].msg).toEqual('Please include a valid email')
+      expect(res.body.errors[0].param).toEqual('email')
+      expect(res.body.errors[0].location).toEqual('body')
+    })
+  })
+
+  describe('Test password param', () => {
+    it('Should not create a test user without a password', async () => {
+      expect.assertions(5)
+
+      const res = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'Bad User',
+          email: 'baduser@gmail.com'
+        })
+      expect(res.statusCode).toEqual(400)
+      expect(res.body).not.toHaveProperty('token')
+      expect(res.body.errors[0].msg).toEqual(
+        'Please enter a password with 6 or more characters'
+      )
+      expect(res.body.errors[0].param).toEqual('password')
+      expect(res.body.errors[0].location).toEqual('body')
+    })
+
+    it('Should not create a test user with an invalid password', async () => {
+      expect.assertions(5)
+
+      const res = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          name: 'Bad User',
+          email: 'baduser@gmail.com',
+          password: '1234'
+        })
+      expect(res.statusCode).toEqual(400)
+      expect(res.body).not.toHaveProperty('token')
+      expect(res.body.errors[0].msg).toEqual(
+        'Please enter a password with 6 or more characters'
+      )
+      expect(res.body.errors[0].param).toEqual('password')
+      expect(res.body.errors[0].location).toEqual('body')
+    })
+  })
 })
 
-it('Should delete the test user', async () => {
-  expect.assertions(2)
+describe('Delete user testing', () => {
+  let token = ''
 
-  let res = await request(server)
-    .post('/api/users')
-    .set('Content-Type', 'application/json')
-    .send({
-      name: 'Test User',
-      email: 'testuser@gmail.com',
-      password: 'testpass123'
-    })
+  beforeEach(async () => {
+    const res = await request(server)
+      .post('/api/users')
+      .set('Content-Type', 'application/json')
+      .send({
+        name: 'Test User',
+        email: 'testuser@gmail.com',
+        password: 'testpass123'
+      })
 
-  const token = res.body.token
+    token = res.body.token
+  })
 
-  res = await request(server).delete('/api/users').set('x-auth-token', token)
-  expect(res.statusCode).toEqual(200)
-  expect(res.body.msg).toEqual('User deleted')
+  it('Should delete the test user', async () => {
+    expect.assertions(2)
+
+    const res = await request(server)
+      .delete('/api/users')
+      .set('x-auth-token', token)
+    expect(res.statusCode).toEqual(200)
+    expect(res.body.msg).toEqual('User deleted')
+  })
 })
