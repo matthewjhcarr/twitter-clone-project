@@ -154,7 +154,7 @@ describe('Delete user testing', () => {
         password: 'testpass123'
       })
 
-    token = res.body.token
+    token = res.body.token // skipcq: JS-0243
   })
 
   it('Should delete the test user', async () => {
