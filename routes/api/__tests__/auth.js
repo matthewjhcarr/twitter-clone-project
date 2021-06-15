@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const request = require('supertest')
+const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
 const { testAuth } = require('../../../config')
@@ -39,7 +40,7 @@ beforeAll(async () => {
 })
 describe('User login testing', () => {
   it('Should log an existing user in', async () => {
-    expect.assertions(2)
+    expect.assertions(2) // skipcq: JS-0074
 
     const res = await request(server)
       .post('/api/auth')
@@ -49,12 +50,12 @@ describe('User login testing', () => {
         password: 'testpass123'
       })
 
-    expect(res.statusCode).toEqual(200)
+    expect(res.statusCode).toEqual(StatusCodes.OK)
     expect(res.body).toHaveProperty('token')
   })
 
   it('Should not log a non-existing user in', async () => {
-    expect.assertions(3)
+    expect.assertions(3) // skipcq: JS-0074
 
     const res = await request(server)
       .post('/api/auth')
@@ -64,14 +65,14 @@ describe('User login testing', () => {
         password: 'fakepass123'
       })
 
-    expect(res.statusCode).toEqual(400)
+    expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
     expect(res.body).not.toHaveProperty('token')
     expect(res.body.errors[0][0].msg).toEqual('Invalid credentials')
   })
 
   describe('Password testing', () => {
     it('Should not log an existing user in with a wrong password', async () => {
-      expect.assertions(3)
+      expect.assertions(3) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/auth')
@@ -81,13 +82,13 @@ describe('User login testing', () => {
           password: 'fakepass123'
         })
 
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0][0].msg).toEqual('Invalid credentials')
     })
 
     it('Should not log an existing user in without a password', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/auth')
@@ -96,7 +97,7 @@ describe('User login testing', () => {
           email: 'testuser@gmail.com'
         })
 
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Password is required')
       expect(res.body.errors[0].param).toEqual('password')
@@ -106,7 +107,7 @@ describe('User login testing', () => {
 
   describe('Email testing', () => {
     it('Should not log an existing user in with an invalid email', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/auth')
@@ -116,7 +117,7 @@ describe('User login testing', () => {
           password: 'testpass123'
         })
 
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Please include a valid email')
       expect(res.body.errors[0].param).toEqual('email')
@@ -124,7 +125,7 @@ describe('User login testing', () => {
     })
 
     it('Should not log an existing user in without an email', async () => {
-      expect.assertions(5)
+      expect.assertions(5) // skipcq: JS-0074
 
       const res = await request(server)
         .post('/api/auth')
@@ -133,7 +134,7 @@ describe('User login testing', () => {
           password: 'testpass123'
         })
 
-      expect(res.statusCode).toEqual(400)
+      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
       expect(res.body).not.toHaveProperty('token')
       expect(res.body.errors[0].msg).toEqual('Please include a valid email')
       expect(res.body.errors[0].param).toEqual('email')
