@@ -21,6 +21,7 @@ jobs:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           TEST_USERS: ${{ secrets.TEST_USERS }}
           TEST_AUTH: ${{ secrets.TEST_AUTH }}
+          TEST_PROFILE: ${{ secrets.TEST_PROFILE }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: yarn test --verbose
