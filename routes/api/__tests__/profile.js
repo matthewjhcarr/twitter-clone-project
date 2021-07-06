@@ -23,7 +23,7 @@ beforeAll(async () => {
 
     console.log('Connected to testProfile')
 
-    var res = await request(server)
+    const res = await request(server)
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
@@ -133,13 +133,13 @@ describe('Profile testing', () => {
     it('Should return two profiles', async () => {
       expect.assertions(7) // skipcq: JS-0074
 
-      var token2 = ''
-      var testName2 = 'Other Name'
-      var testBio2 = 'Other Bio'
-      var testLocation2 = 'Other Location'
+      let token2 = ''
+      const testName2 = 'Other Name'
+      const testBio2 = 'Other Bio'
+      const testLocation2 = 'Other Location'
 
       // Register another user
-      var res = await request(server)
+      let res = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
