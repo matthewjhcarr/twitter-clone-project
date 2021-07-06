@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { StatusCodes } = require('http-status-codes')
 const auth = require('../../middleware/auth')
 const { check, validationResult } = require('express-validator')
 
@@ -16,13 +17,15 @@ router.get('/me', auth, async (req, res) => {
     )
 
     if (!profile) {
-      return res.status(400).json({ msg: 'There is no profile for this user' })
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'There is no profile for this user' })
     }
 
     res.json(profile)
   } catch (err) {
     console.err(err.message)
-    res.status(500).send('Server Error')
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -35,7 +38,9 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: errors.array() })
     }
 
     const {
@@ -85,7 +90,7 @@ router.post(
       res.json(profile)
     } catch (err) {
       console.error(err.message)
-      res.status(500).send('Server Error')
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
     }
   }
 )
@@ -99,7 +104,7 @@ router.get('/', async (req, res) => {
     res.json(profiles)
   } catch (err) {
     console.error(err.message)
-    res.status(500).send('Server Error')
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -113,15 +118,19 @@ router.get('/user/:user_id', async (req, res) => {
     }).populate('user', ['name', 'avatar'])
 
     if (!profile) {
-      return res.status(400).json({ msg: 'Profile not found.' })
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'Profile not found.' })
     }
     res.json(profile)
   } catch (err) {
     console.error(err.message)
-    if (err.kind == 'ObjectId') {
-      return res.status(400).json({ msg: 'Profile not found.' })
+    if (err.kind === 'ObjectId') {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ msg: 'Profile not found.' })
     }
-    res.status(500).send('Server Error')
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
