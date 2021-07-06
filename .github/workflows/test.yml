@@ -23,4 +23,4 @@ jobs:
           TEST_AUTH: ${{ secrets.TEST_AUTH }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
-        run: yarn test
+        run: yarn test --verbose
