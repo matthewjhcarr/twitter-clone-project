@@ -1,6 +1,9 @@
 const express = require('express')
+const helmet = require('helmet')
+
 const app = express()
 
+app.use(helmet())
 app.use(express.json({ extended: false }))
 
 app.use('/api/users', require('./routes/api/users'))
