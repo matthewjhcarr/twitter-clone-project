@@ -87,7 +87,7 @@ router.post(
       )
     } catch (err) {
       console.error(err.message)
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }
 )
@@ -102,10 +102,10 @@ router.delete('/', auth, async (req, res) => {
     // Remove user
     await User.findOneAndRemove({ _id: req.user.id })
 
-    res.json({ msg: 'User deleted' })
+    return res.json({ msg: 'User deleted' })
   } catch (err) {
     console.error(err.message)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 

@@ -15,9 +15,9 @@ const router = express.Router()
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password')
-    res.json(user)
+    return res.json(user)
   } catch (err) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -75,12 +75,12 @@ router.post(
         (err, token) => {
           if (err) throw err
           // Return jwt
-          res.json({ token })
+          return res.json({ token })
         }
       )
     } catch (err) {
       console.error(err.message)
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }
 )
