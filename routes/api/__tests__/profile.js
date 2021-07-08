@@ -53,7 +53,10 @@ describe('Profile testing', () => {
     it('Should create a profile', async () => {
       expect.assertions(4) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body: { name, bio, location }
+      } = await request(server)
         .post('/api/profile')
         .set('Content-Type', 'application/json')
         .set('x-auth-token', token)
@@ -63,16 +66,21 @@ describe('Profile testing', () => {
           location: testLocation
         })
 
-      expect(res.statusCode).toEqual(StatusCodes.OK)
-      expect(res.body.name).toEqual(testName)
-      expect(res.body.bio).toEqual(testBio)
-      expect(res.body.location).toEqual(testLocation)
+      expect(statusCode).toEqual(StatusCodes.OK)
+      expect(name).toEqual(testName)
+      expect(bio).toEqual(testBio)
+      expect(location).toEqual(testLocation)
     })
 
     it('Should not create a profile without a name', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body: {
+          errors: [{ msg }]
+        }
+      } = await request(server)
         .post('/api/profile')
         .set('Content-Type', 'application/json')
         .set('x-auth-token', token)
@@ -81,8 +89,8 @@ describe('Profile testing', () => {
           location: testLocation
         })
 
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body.errors[0].msg).toEqual('Name is required')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(msg).toEqual('Name is required')
     })
   })
 
@@ -100,34 +108,43 @@ describe('Profile testing', () => {
           location: testLocation
         })
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body: { name, bio, location }
+      } = await request(server)
         .get('/api/profile/me')
         .set('x-auth-token', token)
 
-      expect(res.statusCode).toEqual(StatusCodes.OK)
-      expect(res.body.name).toEqual(testName)
-      expect(res.body.bio).toEqual(testBio)
-      expect(res.body.location).toEqual(testLocation)
+      expect(statusCode).toEqual(StatusCodes.OK)
+      expect(name).toEqual(testName)
+      expect(bio).toEqual(testBio)
+      expect(location).toEqual(testLocation)
     })
 
     it('Should not allow access without a token', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
-      const res = await request(server).get('/api/profile/me')
+      const {
+        statusCode,
+        body: { msg }
+      } = await request(server).get('/api/profile/me')
 
-      expect(res.statusCode).toEqual(StatusCodes.UNAUTHORIZED)
-      expect(res.body.msg).toEqual('No token, authorization denied')
+      expect(statusCode).toEqual(StatusCodes.UNAUTHORIZED)
+      expect(msg).toEqual('No token, authorization denied')
     })
 
     it('Should return error message when profile does not exist', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body: { msg }
+      } = await request(server)
         .get('/api/profile/me')
         .set('x-auth-token', token)
 
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body.msg).toEqual('There is no profile for this user')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(msg).toEqual('There is no profile for this user')
     })
   })
 
@@ -172,22 +189,28 @@ describe('Profile testing', () => {
           location: testLocation2
         })
 
-      res = await request(server).get('/api/profile')
+      const {
+        statusCode,
+        body: [
+          { name: name1, bio: bio1, location: location1 },
+          { name: name2, bio: bio2, location: location2 }
+        ]
+      } = await request(server).get('/api/profile')
 
-      expect(res.statusCode).toEqual(StatusCodes.OK)
-      expect(res.body[0].name).toEqual(testName)
-      expect(res.body[0].bio).toEqual(testBio)
-      expect(res.body[0].location).toEqual(testLocation)
-      expect(res.body[1].name).toEqual(testName2)
-      expect(res.body[1].bio).toEqual(testBio2)
-      expect(res.body[1].location).toEqual(testLocation2)
+      expect(statusCode).toEqual(StatusCodes.OK)
+      expect(name1).toEqual(testName)
+      expect(bio1).toEqual(testBio)
+      expect(location1).toEqual(testLocation)
+      expect(name2).toEqual(testName2)
+      expect(bio2).toEqual(testBio2)
+      expect(location2).toEqual(testLocation2)
     })
 
     it('Should return an empty array when no profiles exist', async () => {
-      const res = await request(server).get('/api/profile')
+      const { statusCode, body } = await request(server).get('/api/profile')
 
-      expect(res.statusCode).toEqual(StatusCodes.OK)
-      expect(res.body.length).toEqual(0)
+      expect(statusCode).toEqual(StatusCodes.OK)
+      expect(body.length).toEqual(0)
     })
   })
 
@@ -195,7 +218,9 @@ describe('Profile testing', () => {
     it('Should return a user profile', async () => {
       expect.assertions(4) // skipcq: JS-0074
 
-      const postRes = await request(server)
+      const {
+        body: { user: userID }
+      } = await request(server)
         .post('/api/profile')
         .set('Content-Type', 'application/json')
         .set('x-auth-token', token)
@@ -205,14 +230,15 @@ describe('Profile testing', () => {
           location: testLocation
         })
 
-      const userID = postRes.body.user
+      const {
+        statusCode,
+        body: { name, bio, location }
+      } = await request(server).get(`/api/profile/user/${userID}`)
 
-      const res = await request(server).get(`/api/profile/user/${userID}`)
-
-      expect(res.statusCode).toEqual(StatusCodes.OK)
-      expect(res.body.name).toEqual(testName)
-      expect(res.body.bio).toEqual(testBio)
-      expect(res.body.location).toEqual(testLocation)
+      expect(statusCode).toEqual(StatusCodes.OK)
+      expect(name).toEqual(testName)
+      expect(bio).toEqual(testBio)
+      expect(location).toEqual(testLocation)
     })
   })
 })

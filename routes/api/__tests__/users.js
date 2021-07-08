@@ -32,49 +32,61 @@ describe('Registration testing', () => {
   it('Should create a test user', async () => {
     expect.assertions(2) // skipcq: JS-0074
 
-    const res = await request(server)
+    const { statusCode, body } = await request(server)
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })
-    expect(res.statusCode).toEqual(StatusCodes.OK)
-    expect(res.body).toHaveProperty('token')
+    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(body).toHaveProperty('token')
   })
 
   describe('Test email param', () => {
     it('Should not create a test user without an email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
           password: 'testpass123'
         })
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body).not.toHaveProperty('token')
-      expect(res.body.errors[0].msg).toEqual('Please include a valid email')
-      expect(res.body.errors[0].param).toEqual('email')
-      expect(res.body.errors[0].location).toEqual('body')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please include a valid email')
+      expect(param).toEqual('email')
+      expect(location).toEqual('body')
     })
 
     it('Should not create a test user with an invalid email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
           email: 'baduser',
           password: 'testpass123'
         })
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body).not.toHaveProperty('token')
-      expect(res.body.errors[0].msg).toEqual('Please include a valid email')
-      expect(res.body.errors[0].param).toEqual('email')
-      expect(res.body.errors[0].location).toEqual('body')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please include a valid email')
+      expect(param).toEqual('email')
+      expect(location).toEqual('body')
     })
   })
 
@@ -82,38 +94,46 @@ describe('Registration testing', () => {
     it('Should not create a test user without a password', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
           email: 'baduser@gmail.com'
         })
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body).not.toHaveProperty('token')
-      expect(res.body.errors[0].msg).toEqual(
-        'Please enter a password with 6 or more characters'
-      )
-      expect(res.body.errors[0].param).toEqual('password')
-      expect(res.body.errors[0].location).toEqual('body')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please enter a password with 6 or more characters')
+      expect(param).toEqual('password')
+      expect(location).toEqual('body')
     })
 
     it('Should not create a test user with an invalid password', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
-      const res = await request(server)
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
           email: 'baduser@gmail.com',
           password: '1234'
         })
-      expect(res.statusCode).toEqual(StatusCodes.BAD_REQUEST)
-      expect(res.body).not.toHaveProperty('token')
-      expect(res.body.errors[0].msg).toEqual(
-        'Please enter a password with 6 or more characters'
-      )
-      expect(res.body.errors[0].param).toEqual('password')
-      expect(res.body.errors[0].location).toEqual('body')
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please enter a password with 6 or more characters')
+      expect(param).toEqual('password')
+      expect(location).toEqual('body')
     })
   })
 })
@@ -138,10 +158,11 @@ describe('Delete user testing', () => {
   it('Should delete the test user', async () => {
     expect.assertions(2) // skipcq: JS-0074
 
-    const res = await request(server)
-      .delete('/api/users')
-      .set('x-auth-token', token)
-    expect(res.statusCode).toEqual(StatusCodes.OK)
-    expect(res.body.msg).toEqual('User deleted')
+    const {
+      statusCode,
+      body: { msg }
+    } = await request(server).delete('/api/users').set('x-auth-token', token)
+    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(msg).toEqual('User deleted')
   })
 })
