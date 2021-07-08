@@ -82,7 +82,7 @@ router.post(
         { expiresIn: jwtExpiration },
         (err, token) => {
           if (err) throw err
-          res.json({ token })
+          return res.json({ token })
         }
       )
     } catch (err) {

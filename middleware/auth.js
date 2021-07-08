@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
     req.user = decoded.user
     next()
   } catch (err) {
-    res.status(StatusCodes.UNAUTHORIZED).json({
+    return res.status(StatusCodes.UNAUTHORIZED).json({
       msg: 'Token is not valid'
     })
   }
