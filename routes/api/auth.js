@@ -2,6 +2,7 @@ const express = require('express')
 const bcrypt = require('bcryptjs')
 const auth = require('../../middleware/auth')
 const jwt = require('jsonwebtoken')
+const { StatusCodes } = require('http-status-codes')
 const { check, validationResult } = require('express-validator')
 const User = require('../../models/User')
 const { jwtSecret, jwtExpiration } = require('../../config')
@@ -16,7 +17,7 @@ router.get('/', auth, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password')
     res.json(user)
   } catch (err) {
-    res.status(500).send('Server Error')
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -32,7 +33,9 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: errors.array() })
     }
 
     const { email, password } = req.body
@@ -42,7 +45,7 @@ router.post(
       const user = await User.findOne({ email })
 
       if (!user) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           errors: [[{ msg: 'Invalid credentials' }]]
         })
       }
@@ -51,7 +54,7 @@ router.post(
       const isMatch = await bcrypt.compare(password, user.password)
 
       if (!isMatch) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           errors: [[{ msg: 'Invalid credentials' }]]
         })
       }
@@ -77,7 +80,7 @@ router.post(
       )
     } catch (err) {
       console.error(err.message)
-      res.status(500).send('Server error')
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }
 )
