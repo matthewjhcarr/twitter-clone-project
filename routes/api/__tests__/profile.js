@@ -23,7 +23,9 @@ beforeAll(async () => {
 
     console.log('Connected to testProfile')
 
-    const res = await request(server)
+    const {
+      body: { token: resToken }
+    } = await request(server)
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
@@ -31,7 +33,7 @@ beforeAll(async () => {
         password: 'testpass123'
       })
 
-    token = res.body.token
+    token = resToken
   } catch (err) {
     console.error(err)
   }
@@ -133,21 +135,20 @@ describe('Profile testing', () => {
     it('Should return two profiles', async () => {
       expect.assertions(7) // skipcq: JS-0074
 
-      let token2 = ''
       const testName2 = 'Other Name'
       const testBio2 = 'Other Bio'
       const testLocation2 = 'Other Location'
 
       // Register another user
-      let res = await request(server)
+      const {
+        body: { token: token2 }
+      } = await request(server)
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
           email: 'testuser2@gmail.com',
           password: 'testpass123'
         })
-
-      token2 = res.body.token
 
       // Create first profile
       await request(server)

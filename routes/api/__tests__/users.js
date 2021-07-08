@@ -122,7 +122,9 @@ describe('Delete user testing', () => {
   let token = ''
 
   beforeEach(async () => {
-    const res = await request(server)
+    const {
+      body: { token: resToken }
+    } = await request(server)
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
@@ -130,7 +132,7 @@ describe('Delete user testing', () => {
         password: 'testpass123'
       })
 
-    token = res.body.token // skipcq: JS-0243
+    token = resToken
   })
 
   it('Should delete the test user', async () => {
