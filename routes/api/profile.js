@@ -22,10 +22,10 @@ router.get('/me', auth, async (req, res) => {
         .json({ msg: 'There is no profile for this user' })
     }
 
-    res.json(profile)
+    return res.json(profile)
   } catch (err) {
     console.err(err.message)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -87,10 +87,10 @@ router.post(
 
       await profile.save()
 
-      res.json(profile)
+      return res.json(profile)
     } catch (err) {
       console.error(err.message)
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
     }
   }
 )
@@ -101,10 +101,10 @@ router.post(
 router.get('/', async (req, res) => {
   try {
     const profiles = await Profile.find().populate('user', ['name', 'avatar'])
-    res.json(profiles)
+    return res.json(profiles)
   } catch (err) {
     console.error(err.message)
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
@@ -122,7 +122,7 @@ router.get('/user/:user_id', async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: 'Profile not found.' })
     }
-    res.json(profile)
+    return res.json(profile)
   } catch (err) {
     console.error(err.message)
     if (err.kind === 'ObjectId') {
@@ -130,7 +130,7 @@ router.get('/user/:user_id', async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ msg: 'Profile not found.' })
     }
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 
