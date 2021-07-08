@@ -78,7 +78,6 @@ router.post(
           return res.json({ token })
         }
       )
-      return
     } catch (err) {
       console.error(err.message)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
