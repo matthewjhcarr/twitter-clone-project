@@ -1,4 +1,5 @@
 const express = require('express')
+const { StatusCodes } = require('http-status-codes')
 const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
@@ -8,6 +9,9 @@ const User = require('../../models/User')
 const { jwtSecret, jwtExpiration } = require('../../config')
 
 const router = express.Router()
+
+const MIN_PASSWORD_LENGTH = 6
+const ENCRYPTION_ROUNDS = 10
 
 // @route   POST api/users
 // @desc    Register user
@@ -19,13 +23,15 @@ router.post(
     check(
       'password',
       'Please enter a password with 6 or more characters'
-    ).isLength({ min: 6 })
+    ).isLength({ min: MIN_PASSWORD_LENGTH })
   ],
   async (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: errors.array() })
     }
 
     const { email, password } = req.body
@@ -35,7 +41,7 @@ router.post(
       let user = await User.findOne({ email })
 
       if (user) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           errors: [[{ msg: 'User already exists' }]]
         })
       }
@@ -58,7 +64,7 @@ router.post(
 
       // Encrypt password
       // 10 rounds is recommended amount in documentation
-      const salt = await bcrypt.genSalt(10)
+      const salt = await bcrypt.genSalt(ENCRYPTION_ROUNDS)
 
       user.password = await bcrypt.hash(password, salt)
 
@@ -81,7 +87,7 @@ router.post(
       )
     } catch (err) {
       console.error(err.message)
-      res.status(500).send('Server error')
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }
 )
@@ -99,7 +105,7 @@ router.delete('/', auth, async (req, res) => {
     res.json({ msg: 'User deleted' })
   } catch (err) {
     console.error(err.message)
-    res.status(500).send('Server Error')
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
 

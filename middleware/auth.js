@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const { StatusCodes } = require('http-status-codes')
 const { jwtSecret } = require('../config')
 
 module.exports = function (req, res, next) {
@@ -7,7 +8,7 @@ module.exports = function (req, res, next) {
 
   // Check if no token
   if (!token) {
-    return res.status(401).json({
+    return res.status(StatusCodes.UNAUTHORIZED).json({
       msg: 'No token, authorization denied'
     })
   }
@@ -19,7 +20,7 @@ module.exports = function (req, res, next) {
     req.user = decoded.user
     next()
   } catch (err) {
-    res.status(401).json({
+    res.status(StatusCodes.UNAUTHORIZED).json({
       msg: 'Token is not valid'
     })
   }

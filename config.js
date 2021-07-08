@@ -6,5 +6,6 @@ module.exports = {
   testAuth: process.env.TEST_AUTH,
   testProfile: process.env.TEST_PROFILE,
   jwtSecret: process.env.JWT_SECRET,
-  jwtExpiration: process.env.JWT_EXPIRATION
+  jwtExpiration: process.env.JWT_EXPIRATION,
+  DEV_PORT: 5000
 }
