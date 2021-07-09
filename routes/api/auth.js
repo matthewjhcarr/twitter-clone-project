@@ -67,7 +67,7 @@ router.post(
       }
 
       // Sign jwt
-      jwt.sign(
+      return jwt.sign(
         payload,
         jwtSecret,
         // TODO: change this value back to 3600 for production

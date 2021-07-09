@@ -76,7 +76,7 @@ router.post(
         }
       }
 
-      jwt.sign(
+      return jwt.sign(
         payload,
         jwtSecret,
         { expiresIn: jwtExpiration },
