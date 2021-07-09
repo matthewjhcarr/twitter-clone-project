@@ -3,6 +3,9 @@ const { mongoURI } = require('../config')
 
 const ERROR_CODE = 1
 
+/**
+ * Connects to the database specified in mongoURI
+ */
 const connectDB = async () => {
   try {
     await mongoose.connect(mongoURI, {

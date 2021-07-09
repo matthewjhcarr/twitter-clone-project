@@ -5,6 +5,9 @@ const server = require('../../../server')
 const User = require('../../../models/User')
 const { testUsers } = require('../../../config')
 
+/**
+ * Executed before all tests. Connects to the users test database.
+ */
 beforeAll(async () => {
   try {
     await mongoose.connect(testUsers, {
@@ -20,15 +23,27 @@ beforeAll(async () => {
   }
 })
 
+/**
+ * Executed after all tests. Closes the connection to auth test database.
+ */
 afterAll(async () => {
   await mongoose.connection.close()
 })
 
+/**
+ * Executed after each test. Deletes all users from the database.
+ */
 afterEach(async () => {
   await User.deleteMany()
 })
 
+/**
+ * Tests user registration endpoints.
+ */
 describe('Registration testing', () => {
+  /**
+   * Tests the POST /api/users endpoint.
+   */
   it('Should create a test user', async () => {
     expect.assertions(2) // skipcq: JS-0074
 
@@ -43,7 +58,13 @@ describe('Registration testing', () => {
     expect(body).toHaveProperty('token')
   })
 
+  /**
+   * Tests bad email inputs.
+   */
   describe('Test email param', () => {
+    /**
+     * Tests the POST /api/users endpoint.
+     */
     it('Should not create a test user without an email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -66,6 +87,9 @@ describe('Registration testing', () => {
       expect(location).toEqual('body')
     })
 
+    /**
+     * Tests the POST /api/users endpoint.
+     */
     it('Should not create a test user with an invalid email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -90,7 +114,13 @@ describe('Registration testing', () => {
     })
   })
 
+  /**
+   * Tests bad password inputs
+   */
   describe('Test password param', () => {
+    /**
+     * Tests the POST /api/users endpoint.
+     */
     it('Should not create a test user without a password', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -113,6 +143,9 @@ describe('Registration testing', () => {
       expect(location).toEqual('body')
     })
 
+    /**
+     * Tests the POST /api/users endpoint.
+     */
     it('Should not create a test user with an invalid password', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -138,9 +171,15 @@ describe('Registration testing', () => {
   })
 })
 
+/**
+ * Tests the user delete endpoint
+ */
 describe('Delete user testing', () => {
   let token = ''
 
+  /**
+   * Executed before each test in this block. Creates a test user.
+   */
   beforeEach(async () => {
     const {
       body: { token: resToken }
@@ -155,6 +194,9 @@ describe('Delete user testing', () => {
     token = resToken
   })
 
+  /**
+   * Tests the DELETE /api/users endpoint.
+   */
   it('Should delete the test user', async () => {
     expect.assertions(2) // skipcq: JS-0074
 
