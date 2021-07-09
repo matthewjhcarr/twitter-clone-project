@@ -5,6 +5,9 @@ const server = require('../../../server')
 const User = require('../../../models/User')
 const { testAuth } = require('../../../config')
 
+/**
+ * Executed before all tests. Connects to the auth test database.
+ */
 beforeAll(async () => {
   try {
     await mongoose.connect(testAuth, {
@@ -20,14 +23,24 @@ beforeAll(async () => {
   }
 })
 
+/**
+ * Executed after all tests. Closes the connection to auth test database.
+ */
 afterAll(async () => {
   await mongoose.connection.close()
 })
 
+/**
+ * Executed after each test. Deletes all users in the database.
+ */
 afterEach(async () => {
   await User.deleteMany()
 })
 
+/**
+ * Executed before all tests. Adds a test user to the database.
+ * TODO: this method is a duplicate and should be combined with the first beforeAll()
+ */
 beforeAll(async () => {
   await request(server)
     .post('/api/users')
@@ -39,7 +52,13 @@ beforeAll(async () => {
     })
 })
 
+/**
+ * Tests the user login endpoints.
+ */
 describe('User login testing', () => {
+  /**
+   * Tests login endpoint POST /api/auth
+   */
   it('Should log an existing user in', async () => {
     expect.assertions(2) // skipcq: JS-0074
 
@@ -55,6 +74,9 @@ describe('User login testing', () => {
     expect(body).toHaveProperty('token')
   })
 
+  /**
+   * Tests login endpoint POST /api/auth
+   */
   it('Should not log a non-existing user in', async () => {
     expect.assertions(3) // skipcq: JS-0074
 
@@ -62,7 +84,7 @@ describe('User login testing', () => {
       statusCode,
       body,
       body: {
-        errors: [[{ msg }]]
+        errors: [{ msg }]
       }
     } = await request(server)
       .post('/api/auth')
@@ -77,7 +99,13 @@ describe('User login testing', () => {
     expect(msg).toEqual('Invalid credentials')
   })
 
+  /**
+   * Tests bad password inputs.
+   */
   describe('Password testing', () => {
+    /**
+     * Tests login endpoint POST /api/auth
+     */
     it('Should not log an existing user in with a wrong password', async () => {
       expect.assertions(3) // skipcq: JS-0074
 
@@ -85,7 +113,7 @@ describe('User login testing', () => {
         statusCode,
         body,
         body: {
-          errors: [[{ msg }]]
+          errors: [{ msg }]
         }
       } = await request(server)
         .post('/api/auth')
@@ -100,6 +128,9 @@ describe('User login testing', () => {
       expect(msg).toEqual('Invalid credentials')
     })
 
+    /**
+     * Tests login endpoint POST /api/auth
+     */
     it('Should not log an existing user in without a password', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -124,7 +155,13 @@ describe('User login testing', () => {
     })
   })
 
+  /**
+   * Tests bad email inputs
+   */
   describe('Email testing', () => {
+    /**
+     * Tests login endpoint POST /api/auth
+     */
     it('Should not log an existing user in with an invalid email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 
@@ -149,6 +186,9 @@ describe('User login testing', () => {
       expect(location).toEqual('body')
     })
 
+    /**
+     * Tests login endpoint POST /api/auth
+     */
     it('Should not log an existing user in without an email', async () => {
       expect.assertions(5) // skipcq: JS-0074
 

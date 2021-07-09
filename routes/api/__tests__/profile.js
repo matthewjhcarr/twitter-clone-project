@@ -12,6 +12,9 @@ const testLocation = 'the test zone'
 
 let token = ''
 
+/**
+ * Executed before all tests. Connects to the profile test database and creates a test user.
+ */
 beforeAll(async () => {
   try {
     await mongoose.connect(testProfile, {
@@ -39,17 +42,32 @@ beforeAll(async () => {
   }
 })
 
+/**
+ * Executed after all tests. Closes the connection to auth test database and deletes any users in the database.
+ */
 afterAll(async () => {
   await User.deleteMany()
   await mongoose.connection.close()
 })
 
+/**
+ * Executed after each test. Deletes all profiles from the database.
+ */
 afterEach(async () => {
   await Profile.deleteMany()
 })
 
+/**
+ * Tests the profile endpoints.
+ */
 describe('Profile testing', () => {
+  /**
+   * Tests profile creation on the POST /api/profile endpoint
+   */
   describe('POST /api/profile (Profile creation)', () => {
+    /**
+     * Tests the POST /api/profile endpoint
+     */
     it('Should create a profile', async () => {
       expect.assertions(4) // skipcq: JS-0074
 
@@ -72,6 +90,9 @@ describe('Profile testing', () => {
       expect(location).toEqual(testLocation)
     })
 
+    /**
+     * Tests the POST /api/profile endpoint
+     */
     it('Should not create a profile without a name', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
@@ -94,7 +115,13 @@ describe('Profile testing', () => {
     })
   })
 
-  describe('GET api/profile/me (Retrieve logged in users profile)', () => {
+  /**
+   * Tests the retrieval of the logged in user's profile on the GET /api/profile/me endpoint
+   */
+  describe('GET /api/profile/me (Retrieve logged in users profile)', () => {
+    /**
+     * Tests the GET api/profile/me endpoint
+     */
     it('Should retrieve current users profile', async () => {
       expect.assertions(4) // skipcq: JS-0074
       // Create profile
@@ -121,6 +148,9 @@ describe('Profile testing', () => {
       expect(location).toEqual(testLocation)
     })
 
+    /**
+     * Tests the GET /api/profile/me endpoint
+     */
     it('Should not allow access without a token', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
@@ -133,6 +163,9 @@ describe('Profile testing', () => {
       expect(msg).toEqual('No token, authorization denied')
     })
 
+    /**
+     * Tests the GET /api/profile/me endpoint
+     */
     it('Should return error message when profile does not exist', async () => {
       expect.assertions(2) // skipcq: JS-0074
 
@@ -148,7 +181,13 @@ describe('Profile testing', () => {
     })
   })
 
-  describe('GET api/profile (Get all profiles)', () => {
+  /**
+   * Tests the retrieval of all profiles on the GET /api/profile
+   */
+  describe('GET /api/profile (Get all profiles)', () => {
+    /**
+     * Tests the GET /api/profile endpoint
+     */
     it('Should return two profiles', async () => {
       expect.assertions(7) // skipcq: JS-0074
 
@@ -206,6 +245,9 @@ describe('Profile testing', () => {
       expect(location2).toEqual(testLocation2)
     })
 
+    /**
+     * Tests the GET /api/profile endpoint
+     */
     it('Should return an empty array when no profiles exist', async () => {
       const { statusCode, body } = await request(server).get('/api/profile')
 
@@ -214,7 +256,13 @@ describe('Profile testing', () => {
     })
   })
 
-  describe('GET api/profile/user/:user_id (Get profile by user ID)', () => {
+  /**
+   * Tests the retrieval of profiles by user ID on the GET /api/profile/user/:user_id endpoint
+   */
+  describe('GET /api/profile/user/:user_id (Get profile by user ID)', () => {
+    /**
+     * Tests the GET /api/profile/user/:user_id endpoint
+     */
     it('Should return a user profile', async () => {
       expect.assertions(4) // skipcq: JS-0074
 
