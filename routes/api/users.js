@@ -13,9 +13,66 @@ const router = express.Router()
 const MIN_PASSWORD_LENGTH = 6
 const ENCRYPTION_ROUNDS = 10
 
-// @route   POST api/users
-// @desc    Register user
-// @access  public
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Register a user
+ *     description: Returns the new user's token. Can be used to register new users.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: The user's email address
+ *                 example: johndoe@gmail.com
+ *               password:
+ *                 type: string
+ *                 description: The user's password
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: OK response. Returns the logged in user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: The jwt authentication token
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjBlNGM4NDNiYzcxZmQwODQzMzYxMjUwIn0sImlhdCI6MTYyNTc3NTEyMCwiZXhwIjoxNjI1Nzc1NDgwfQ.5iJJLusOhXv9Ukjw1-zrvG2E5yORqrahwih0qKuMmEA
+ *       400:
+ *         description: Bad request. The response body must contain the required fields email and password.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 errors:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       msg:
+ *                         type: string
+ *                         description: A message describing the problem with the request
+ *                         example: Password is required
+ *                       param:
+ *                         type: string
+ *                         description: The name of the parameter in the request with the problem
+ *                         example: password
+ *                       location:
+ *                         type: string
+ *                         description: A message describing the location of the issue with the request
+ *                         example: body
+ *       500:
+ *         description: Internal Server Error response. An error has occured on the server.
+ */
 router.post(
   '/',
   [
@@ -42,7 +99,7 @@ router.post(
 
       if (user) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-          errors: [[{ msg: 'User already exists' }]]
+          errors: [{ msg: 'User already exists' }]
         })
       }
 
@@ -92,9 +149,35 @@ router.post(
   }
 )
 
-// @route   DELETE api/users
-// @desc    Delete user and profile
-// @access  Private
+/**
+ * @swagger
+ * /api/users:
+ *   delete:
+ *     summary: Deletes a user TODO (and their profile)
+ *     description: Deletes a user from the database TODO along with their profile.
+ *     parameters:
+ *       - in: header
+ *         name: x-auth-token
+ *         description: Authentication token
+ *         schema:
+ *           type: string
+ *           format: jwt
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: OK response. Returns the logged in user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ *                   description: A message to confirm the action was successful
+ *                   example: User deleted
+ *       500:
+ *         description: Internal Server Error response. An error has occured on the server.
+ */
 router.delete('/', auth, async (req, res) => {
   try {
     // TODO: Remove profile
