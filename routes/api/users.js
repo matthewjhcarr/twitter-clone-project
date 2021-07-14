@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const auth = require('../../middleware/auth')
 const User = require('../../models/User')
+const Profile = require('../../models/Profile')
 const { jwtSecret, jwtExpiration } = require('../../config')
 
 const router = express.Router()
@@ -153,8 +154,8 @@ router.post(
  * @swagger
  * /api/users:
  *   delete:
- *     summary: Deletes a user TODO (and their profile)
- *     description: Deletes a user from the database TODO along with their profile.
+ *     summary: Deletes a user and their profile
+ *     description: Deletes a user from the database along with their profile.
  *     parameters:
  *       - in: header
  *         name: x-auth-token
@@ -180,7 +181,8 @@ router.post(
  */
 router.delete('/', auth, async (req, res) => {
   try {
-    // TODO: Remove profile
+    // Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id })
 
     // Remove user
     await User.findOneAndRemove({ _id: req.user.id })
