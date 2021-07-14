@@ -303,7 +303,7 @@ router.get('/', async (req, res) => {
  *     description: Returns a single user's profile. Allows users to view profiles.
  *     parameters:
  *       - in: userid
- *         name:
+ *         name: User ID
  *         schema:
  *           type: string
  *         required: true
