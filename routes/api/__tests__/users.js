@@ -216,25 +216,27 @@ describe('Delete user testing', () => {
     expect.assertions(6) // skipcq: JS-0074
 
     // Send delete request
-    var {
-      statusCode,
-      body: { msg }
+    let {
+      statusCode: userStatusCode,
+      body: { msg: userMsg }
     } = await request(server).delete('/api/users').set('x-auth-token', token)
 
-    expect(statusCode).toEqual(StatusCodes.OK)
-    expect(msg).toEqual('User deleted')
+    expect(userStatusCode).toEqual(StatusCodes.OK)
+    expect(userMsg).toEqual('User deleted')
 
     // Assert profile has been deleted
-    var { statusCode, body } = await request(server).get('/api/profile')
+    let { statusCode: profileStatusCode, body } = await request(server).get(
+      '/api/profile'
+    )
 
-    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(profileStatusCode).toEqual(StatusCodes.OK)
     expect(body).toEqual([])
 
     // Assert user has been deleted
-    var {
-      statusCode,
+    let {
+      statusCode: authStatusCode,
       body: {
-        errors: [{ msg }]
+        errors: [{ msg: authMsg }]
       }
     } = await request(server)
       .post('/api/auth')
@@ -244,8 +246,8 @@ describe('Delete user testing', () => {
         password: 'testpass123'
       })
 
-    expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
-    expect(msg).toEqual('Invalid credentials')
+    expect(authStatusCode).toEqual(StatusCodes.BAD_REQUEST)
+    expect(authMsg).toEqual('Invalid credentials')
   })
 
   /**
@@ -255,25 +257,25 @@ describe('Delete user testing', () => {
     expect.assertions(6) // skipcq: JS-0074
 
     // Send delete request
-    var {
-      statusCode,
+    let {
+      statusCode: userStatusCode,
       body: { msg }
     } = await request(server).delete('/api/users').set('x-auth-token', '')
 
-    expect(statusCode).toEqual(StatusCodes.UNAUTHORIZED)
+    expect(userStatusCode).toEqual(StatusCodes.UNAUTHORIZED)
     expect(msg).toEqual('No token, authorization denied')
 
     // Assert profile has not been deleted
-    var {
-      statusCode,
+    let {
+      statusCode: profileStatusCode,
       body: [{ name }]
     } = await request(server).get('/api/profile')
 
-    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(profileStatusCode).toEqual(StatusCodes.OK)
     expect(name).toEqual('test name')
 
     // Assert user has not been deleted
-    var { statusCode, body } = await request(server)
+    let { statusCode: authStatusCode, body } = await request(server)
       .post('/api/auth')
       .set('Content-Type', 'application/json')
       .send({
@@ -281,7 +283,7 @@ describe('Delete user testing', () => {
         password: 'testpass123'
       })
 
-    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(authStatusCode).toEqual(StatusCodes.OK)
     expect(body).toHaveProperty('token')
   })
 })
