@@ -3,6 +3,7 @@ const request = require('supertest')
 const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
+const Profile = require('../../../models/Profile')
 const { testUsers } = require('../../../config')
 
 /**
@@ -192,19 +193,95 @@ describe('Delete user testing', () => {
       })
 
     token = resToken
+
+    await request(server)
+      .post('/api/profile')
+      .set('Content-Type', 'application/json')
+      .set('x-auth-token', token)
+      .send({
+        name: 'test name',
+        bio: 'test bio',
+        location: 'test location'
+      })
+  })
+
+  afterEach(async () => {
+    await Profile.deleteMany()
   })
 
   /**
    * Tests the DELETE /api/users endpoint.
    */
   it('Should delete the test user', async () => {
-    expect.assertions(2) // skipcq: JS-0074
+    expect.assertions(6) // skipcq: JS-0074
 
-    const {
+    // Send delete request
+    var {
       statusCode,
       body: { msg }
     } = await request(server).delete('/api/users').set('x-auth-token', token)
+
     expect(statusCode).toEqual(StatusCodes.OK)
     expect(msg).toEqual('User deleted')
+
+    // Assert profile has been deleted
+    var { statusCode, body } = await request(server).get('/api/profile')
+
+    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(body).toEqual([])
+
+    // Assert user has been deleted
+    var {
+      statusCode,
+      body: {
+        errors: [{ msg }]
+      }
+    } = await request(server)
+      .post('/api/auth')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: 'testuser@gmail.com',
+        password: 'testpass123'
+      })
+
+    expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+    expect(msg).toEqual('Invalid credentials')
+  })
+
+  /**
+   * Tests the DELETE /api/users endpoint.
+   */
+  it('Should not delete the user if given no token', async () => {
+    expect.assertions(6) // skipcq: JS-0074
+
+    // Send delete request
+    var {
+      statusCode,
+      body: { msg }
+    } = await request(server).delete('/api/users').set('x-auth-token', '')
+
+    expect(statusCode).toEqual(StatusCodes.UNAUTHORIZED)
+    expect(msg).toEqual('No token, authorization denied')
+
+    // Assert profile has not been deleted
+    var {
+      statusCode,
+      body: [{ name }]
+    } = await request(server).get('/api/profile')
+
+    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(name).toEqual('test name')
+
+    // Assert user has not been deleted
+    var { statusCode, body } = await request(server)
+      .post('/api/auth')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: 'testuser@gmail.com',
+        password: 'testpass123'
+      })
+
+    expect(statusCode).toEqual(StatusCodes.OK)
+    expect(body).toHaveProperty('token')
   })
 })
