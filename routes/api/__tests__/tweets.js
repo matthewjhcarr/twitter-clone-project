@@ -302,7 +302,7 @@ describe('Tweet testing', () => {
      * Tests retrieval of all tweets on GET /api/tweets endpoint
      */
     describe('GET /api/tweets (Get all tweets)', () => {
-      let secondTweet = 'what up'
+      const secondTweet = 'what up'
 
       beforeEach(async () => {
         await request(server)
