@@ -85,7 +85,8 @@ beforeAll(async () => {
         location: 'Just floating around'
       })
   } catch (err) {
-
+    // Exit process with failure
+    process.exit(ERROR_CODE)
   }
 })
 

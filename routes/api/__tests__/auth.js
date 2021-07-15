@@ -3,7 +3,7 @@ const request = require('supertest')
 const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
-const { testAuth } = require('../../../config')
+const { testAuth, ERROR_CODE } = require('../../../config')
 
 /**
  * Executed before all tests. Connects to the auth test database.
@@ -17,7 +17,8 @@ beforeAll(async () => {
       useFindAndModify: false
     })
   } catch (err) {
-
+    // Exit process with failure
+    process.exit(ERROR_CODE)
   }
 })
 

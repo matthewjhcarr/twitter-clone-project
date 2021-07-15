@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
 const Profile = require('../../../models/Profile')
-const { testProfile } = require('../../../config')
+const { testProfile, ERROR_CODE } = require('../../../config')
 
 const testName = 'Test User'
 const testBio = 'hello, world!'
@@ -36,7 +36,8 @@ beforeAll(async () => {
 
     token = resToken
   } catch (err) {
-
+    // Exit process with failure
+    process.exit(ERROR_CODE)
   }
 })
 

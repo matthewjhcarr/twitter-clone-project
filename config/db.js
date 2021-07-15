@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-const { mongoURI } = require('../config')
-
-const ERROR_CODE = 1
+const { mongoURI, ERROR_CODE } = require('../config')
 
 /**
  * Connects to the database specified in mongoURI
