@@ -157,7 +157,7 @@ router.post(
 
       const newTweet = new Tweet({
         user: req.user.id,
-        name: name,
+        name,
         avatar: user.avatar,
         text: req.body.text
       })
@@ -255,7 +255,7 @@ router.post(
 
       const newTweet = new Tweet({
         user: req.user.id,
-        name: name,
+        name,
         avatar: user.avatar,
         text: req.body.text,
         repliedTo: replyTo.id
