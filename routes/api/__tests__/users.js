@@ -18,9 +18,9 @@ beforeAll(async () => {
       useFindAndModify: false
     })
 
-    console.log('Connected to testUsers')
+    
   } catch (err) {
-    console.error(err)
+    
   }
 })
 

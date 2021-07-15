@@ -85,7 +85,7 @@ beforeAll(async () => {
         location: 'Just floating around'
       })
   } catch (err) {
-    console.error(err)
+    
   }
 })
 

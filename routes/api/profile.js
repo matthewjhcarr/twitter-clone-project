@@ -88,7 +88,7 @@ router.get('/me', auth, async (req, res) => {
 
     return res.json(profile)
   } catch (err) {
-    console.err(err.message)
+    
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
@@ -229,7 +229,7 @@ router.post(
 
       return res.json(profile)
     } catch (err) {
-      console.error(err.message)
+      
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
     }
   }
@@ -290,7 +290,7 @@ router.get('/', async (req, res) => {
     const profiles = await Profile.find().populate('user', ['name', 'avatar'])
     return res.json(profiles)
   } catch (err) {
-    console.error(err.message)
+    
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
@@ -375,7 +375,7 @@ router.get('/user/:user_id', async (req, res) => {
     }
     return res.json(profile)
   } catch (err) {
-    console.error(err.message)
+    
     if (err.kind === 'ObjectId') {
       return res
         .status(StatusCodes.BAD_REQUEST)

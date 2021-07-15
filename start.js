@@ -7,4 +7,4 @@ connectDB()
 
 const PORT = process.env.PORT || DEV_PORT
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => )

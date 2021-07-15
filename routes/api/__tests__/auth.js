@@ -17,9 +17,9 @@ beforeAll(async () => {
       useFindAndModify: false
     })
 
-    console.log('Connected to testAuth')
+    
   } catch (err) {
-    console.error(err)
+    
   }
 })
 

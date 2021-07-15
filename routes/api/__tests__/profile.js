@@ -24,7 +24,7 @@ beforeAll(async () => {
       useFindAndModify: false
     })
 
-    console.log('Connected to testProfile')
+    
 
     const {
       body: { token: resToken }
@@ -38,7 +38,7 @@ beforeAll(async () => {
 
     token = resToken
   } catch (err) {
-    console.error(err)
+    
   }
 })
 
