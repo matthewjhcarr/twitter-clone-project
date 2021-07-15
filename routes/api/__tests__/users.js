@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes')
 const server = require('../../../server')
 const User = require('../../../models/User')
 const Profile = require('../../../models/Profile')
-const { testUsers } = require('../../../config')
+const { testUsers, ERROR_CODE } = require('../../../config')
 
 /**
  * Executed before all tests. Connects to the users test database.
@@ -17,10 +17,9 @@ beforeAll(async () => {
       useCreateIndex: true,
       useFindAndModify: false
     })
-
-    console.log('Connected to testUsers')
   } catch (err) {
-    console.error(err)
+    // Exit process with failure
+    process.exit(ERROR_CODE)
   }
 })
 

@@ -5,7 +5,7 @@ const server = require('../../../server')
 const User = require('../../../models/User')
 const Profile = require('../../../models/Profile')
 const Tweet = require('../../../models/Tweet')
-const { testTweets } = require('../../../config')
+const { testTweets, ERROR_CODE } = require('../../../config')
 
 const TEST_NAME = 'gooby goober'
 const TEST_BIO = 'its a bio init'
@@ -85,7 +85,8 @@ beforeAll(async () => {
         location: 'Just floating around'
       })
   } catch (err) {
-    console.error(err)
+    // Exit process with failure
+    process.exit(ERROR_CODE)
   }
 })
 

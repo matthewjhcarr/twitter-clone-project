@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-const { mongoURI } = require('../config')
-
-const ERROR_CODE = 1
+const { mongoURI, ERROR_CODE } = require('../config')
 
 /**
  * Connects to the database specified in mongoURI
@@ -14,10 +12,7 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: true
     })
-
-    console.log('MongoDB Connected...')
   } catch (err) {
-    console.error(err.message)
     // Exit process with failure
     process.exit(ERROR_CODE)
   }
