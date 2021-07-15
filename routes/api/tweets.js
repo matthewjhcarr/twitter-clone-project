@@ -251,10 +251,11 @@ router.post(
       }
 
       const user = await User.findById(req.user.id).select('-password')
+      const { name } = await Profile.findOne({ user: req.user.id })
 
       const newTweet = new Tweet({
         user: req.user.id,
-        name: user.name,
+        name: name,
         avatar: user.avatar,
         text: req.body.text,
         repliedTo: replyTo.id
@@ -352,6 +353,17 @@ router.get('/', auth, async (req, res) => {
  *           application/json:
  *             schema:
  *               $ref: '#components/schemas/MinError'
+ *       404:
+ *         description: Not found. Tweet does not exist.
+ *         content:
+ *           application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               msg:
+ *                 type: string
+ *                 description: A message to describe the error
+ *                 example: Tweet not found
  *       500:
  *         description: Internal Server Error response. An error has occured on the server.
  */
@@ -627,7 +639,7 @@ router.put(
  *                     type: string
  *                     description: The ID of this like (can be ignored)
  *                     example: 60ef643efd3e251356cd3472
- *                   reply:
+ *                   user:
  *                     type: string
  *                     description: The ID of the user who liked this tweet
  *                     example: 60ef2853601eb20b9648c411
@@ -684,6 +696,9 @@ router.put('/like/:tweet_id', auth, async (req, res) => {
     return res.json(tweet.likes)
   } catch (error) {
     console.error(error.message)
+    if (error.kind === 'ObjectId') {
+      return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
+    }
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
@@ -723,7 +738,7 @@ router.put('/like/:tweet_id', auth, async (req, res) => {
  *                     type: string
  *                     description: The ID of this like (can be ignored)
  *                     example: 60ef643efd3e251356cd3472
- *                   reply:
+ *                   user:
  *                     type: string
  *                     description: The ID of the user who liked this tweet
  *                     example: 60ef2853601eb20b9648c411
@@ -784,7 +799,10 @@ router.put('/unlike/:tweet_id', auth, async (req, res) => {
 
     return res.json(tweet.likes)
   } catch (error) {
-    console.error(err.message)
+    console.error(error.message)
+    if (error.kind === 'ObjectId') {
+      return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
+    }
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })

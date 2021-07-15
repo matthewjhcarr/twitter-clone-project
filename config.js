@@ -5,6 +5,7 @@ module.exports = {
   testUsers: process.env.TEST_USERS,
   testAuth: process.env.TEST_AUTH,
   testProfile: process.env.TEST_PROFILE,
+  testTweets: process.env.TEST_TWEETS,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiration: process.env.JWT_EXPIRATION,
   DEV_PORT: 5000

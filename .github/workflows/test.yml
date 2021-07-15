@@ -22,6 +22,7 @@ jobs:
           TEST_USERS: ${{ secrets.TEST_USERS }}
           TEST_AUTH: ${{ secrets.TEST_AUTH }}
           TEST_PROFILE: ${{ secrets.TEST_PROFILE }}
+          TEST_TWEETS: ${{ secrets.TEST_TWEETS }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: yarn test --verbose
