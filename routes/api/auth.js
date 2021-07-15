@@ -185,7 +185,6 @@ router.post(
         }
       )
     } catch (err) {
-      
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }

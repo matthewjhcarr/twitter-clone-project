@@ -14,10 +14,7 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: true
     })
-
-    
   } catch (err) {
-    
     // Exit process with failure
     process.exit(ERROR_CODE)
   }

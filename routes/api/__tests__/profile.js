@@ -24,8 +24,6 @@ beforeAll(async () => {
       useFindAndModify: false
     })
 
-    
-
     const {
       body: { token: resToken }
     } = await request(server)
@@ -38,7 +36,7 @@ beforeAll(async () => {
 
     token = resToken
   } catch (err) {
-    
+
   }
 })
 

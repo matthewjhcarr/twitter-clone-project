@@ -17,10 +17,8 @@ beforeAll(async () => {
       useCreateIndex: true,
       useFindAndModify: false
     })
-
-    
   } catch (err) {
-    
+
   }
 })
 

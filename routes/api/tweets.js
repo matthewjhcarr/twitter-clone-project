@@ -166,7 +166,6 @@ router.post(
 
       return res.json(tweet)
     } catch (err) {
-      
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
     }
   }
@@ -269,7 +268,6 @@ router.post(
 
       return res.json(tweet)
     } catch (err) {
-      
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
     }
   }
@@ -314,7 +312,6 @@ router.get('/', auth, async (req, res) => {
 
     return res.json(tweets)
   } catch (err) {
-    
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
@@ -378,7 +375,6 @@ router.get('/:tweet_id', auth, async (req, res) => {
 
     return res.json(tweet)
   } catch (err) {
-    
     if (err.kind === 'ObjectId') {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
     }
@@ -470,7 +466,6 @@ router.delete('/:tweet_id', auth, async (req, res) => {
 
     return res.json({ msg: 'Tweet removed' })
   } catch (err) {
-    
     if (err.kind === 'ObjectId') {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
     }
@@ -593,7 +588,6 @@ router.put(
 
       return res.json(tweet)
     } catch (err) {
-      
       if (err.kind === 'ObjectId') {
         return res
           .status(StatusCodes.NOT_FOUND)
@@ -695,7 +689,6 @@ router.put('/like/:tweet_id', auth, async (req, res) => {
 
     return res.json(tweet.likes)
   } catch (error) {
-    
     if (error.kind === 'ObjectId') {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
     }
@@ -799,7 +792,6 @@ router.put('/unlike/:tweet_id', auth, async (req, res) => {
 
     return res.json(tweet.likes)
   } catch (error) {
-    
     if (error.kind === 'ObjectId') {
       return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Tweet not found' })
     }

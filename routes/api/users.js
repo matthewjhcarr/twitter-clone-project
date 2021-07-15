@@ -144,7 +144,6 @@ router.post(
         }
       )
     } catch (err) {
-      
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server error')
     }
   }
@@ -189,7 +188,6 @@ router.delete('/', auth, async (req, res) => {
 
     return res.json({ msg: 'User deleted' })
   } catch (err) {
-    
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Server Error')
   }
 })
