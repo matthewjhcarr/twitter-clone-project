@@ -8,7 +8,7 @@ tweets.forEach((tweet) => {
     ele.addEventListener('click', (e) => e.stopPropagation())
   )
 
-  function handleClick(event) {
+  function handleClick (event) {
     const noTextSelected = !window.getSelection().toString()
 
     if (noTextSelected) {
