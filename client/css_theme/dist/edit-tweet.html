@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.min.css">
+  <script src="https://kit.fontawesome.com/56b90b19d1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Welcome to the Twitter Clone</title>
+</head>
+<body class="bg-dark">
+  <section class="login-container">
+    <!-- Alert -->
+    <div class="alert alert-danger">
+      You have to write something, at least
+    </div>
+    <h1 class="large text-primary">
+      <i class="fas fa-kiwi-bird"></i>
+    </h1>
+    <p class="lead"><i class="far fa-edit"></i> Edit your tweet</p>
+    <div class="tweet-form">
+      <form action="home.html" class="form">
+        <div class="form-group">
+          <textarea name="tweet-input" id="tweet-input" rows="1" placeholder="Tell me about it" class="bg-dark"></textarea>
+        </div>
+        <input type="submit" value="Tweet" class="btn btn-primary">
+      </form>
+    </div>
+  </section>
+  <!-- JavaScript imports -->
+  <script src="js/scripts.js"></script>
+  <script src="js/autosize.js"></script>
+  <script>
+    autosize(document.getElementById('tweet-input'));
+  </script>
+</body>
+</html>
