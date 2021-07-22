@@ -1,0 +1,341 @@
+@import 'config';
+@import 'utilities';
+@import 'forms';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+// Navbar
+.navbar {
+  display: flex;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  z-index: 1;
+  // These properties can be changed for a side navbar
+  top: 0;
+  height: 100%;
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+
+  ul {
+    // Puts links side-by-side
+    display: flex;
+    flex-direction: column;
+
+    li {
+      margin-bottom: 2rem;
+    }
+  }
+
+  h1 {
+    top: 0;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+// Landing
+.landing {
+  position: relative;
+  background: url('../img/landing.jpg') no-repeat center center/cover;
+  height: 100vh;
+
+  &-inner {
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+// Container
+.container {
+  background: $dark-color;
+  padding: 0 8rem;
+}
+
+// Footer
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  border-top: solid 1px $primary-color;
+  opacity: 0.9;
+
+  ul {
+    // Puts links side-by-side
+    display: flex;
+  }
+
+  a {
+    color: #fff;
+    padding: 0.45rem;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+// Profiles Page
+// THIS METHOD OF LAYING OUT A GRID IS OBSELETE AND WE SHOULD NOT USE IT (specifically grid-gap)
+.profile {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-gap: 2rem;
+  align-items: center;
+  padding: 1rem;
+  line-height: 1.8;
+  border: 3px solid $light-color;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  background: darken($dark-color, 5%);
+}
+
+// Profile page
+
+// // DEMONSTRATION OF GRID IF YOU NEED IT
+// .profile-grid {
+//   display: grid;
+//   grid-template-areas: 'top top' 'tweets tweets' 'tweetsreplies likes';
+//   grid-gap: 1rem;
+
+//   .profile-top {
+//     grid-area: top;
+//   }
+
+//   .profile-tweets {
+//     grid-area: tweets;
+//   }
+
+//   .profile-tweetsreplies {
+//     grid-area: tweetsreplies;
+//   }
+
+//   .profile-likes {
+//     grid-area: likes;
+//   }
+// }
+
+.profile-container {
+  background: darken($dark-color, 5%);
+}
+
+.profile-top {
+  border: 2px solid $light-color;
+
+  img {
+    width: 150px;
+  }
+
+  .bio {
+    color: #fff;
+    padding-bottom: 0;
+  }
+
+  a:hover {
+    color: darken($grey-color, 10%);
+  }
+
+  .btn-edit {
+    margin-top: 7rem;
+    float: right;
+  }
+
+  .details {
+    display: flex;
+
+    span {
+      margin-right: 1rem;
+    }
+  }
+
+  .socials {
+    a {
+      margin: 0 0.3rem;
+    }
+  }
+
+  .stats ul {
+    display: flex;
+
+    li {
+      padding-right: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.profile-tweets {
+  border: 2px solid $light-color;
+}
+
+.profile-tweets-replies {
+  border: 2px solid $light-color;
+}
+
+.profile-likes {
+  border: 2px solid $light-color;
+}
+
+.tweet {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-template-areas: 'avatar details options' 'avatar text text' 'avatar buttons buttons';
+  column-gap: 0.5rem;
+  border: 0.5px solid $border-color;
+  cursor: pointer;
+
+  .avatar {
+    grid-area: avatar;
+  }
+
+  .details {
+    grid-area: details;
+    display: flex;
+
+    span {
+      padding-left: 0.5rem;
+      padding-bottom: 0;
+    }
+
+    .name {
+      color: #fff;
+    }
+  }
+
+  .options {
+    grid-area: options;
+    margin-left: auto;
+    color: $grey-color;
+  }
+
+  .text {
+    grid-area: text;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  // THIS AREA NEEDS TO BE REDONE
+  .buttons {
+    grid-area: buttons;
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+  }
+
+  img {
+    width: 75px;
+  }
+}
+
+.tweet-focus {
+  border: 0.5px solid $border-color;
+
+  .name {
+    color: #fff;
+  }
+
+  a {
+    color: $grey-color;
+  }
+
+  &-top {
+    display: flex;
+
+    img {
+      width: 50px;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      margin-left: 1rem;
+    }
+
+    .options {
+      margin-left: auto;
+      color: $grey-color;
+    }
+  }
+
+  .stats ul {
+    display: flex;
+
+    li {
+      padding-right: 1rem;
+    }
+
+    .count {
+      color: #fff;
+    }
+  }
+
+  .buttons ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+}
+
+.tweet-form {
+  padding: 0 1rem 1rem 1rem;
+  border: 1px solid $border-color;
+
+  textarea {
+    border-style: none;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

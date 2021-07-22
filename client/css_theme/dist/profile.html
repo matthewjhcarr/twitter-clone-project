@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.min.css">
+  <script src="https://kit.fontawesome.com/56b90b19d1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Welcome to the Twitter Clone</title>
+</head>
+<body class="bg-dark">
+  <nav class="navbar">
+    <ul>
+      <li><a href="home.html" class="lead"><i class="fas fa-kiwi-bird"></i></a></li>
+      <li><a href="home.html" class="lead"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#" class="lead"><i class="far fa-bell"></i> Notifications</a></li>
+      <li><a href="#" class="lead"><i class="far fa-envelope"></i> Messages</a></li>
+      <li><a href="profile.html" class="lead"><i class="fas fa-user"></i> Profile</a></li>
+      <li><a href="#" class="btn btn-primary">Tweet</a></li>
+    </ul>
+  </nav>
+  <section class="container">
+    <div class="profile-container my-1">
+      <!-- Top -->
+      <div class="profile-top p-2">
+        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img">
+        <a href="#" class="btn btn-primary btn-edit">Edit Profile</a>
+
+        <div class="basic-details">
+          <p class="name">John Doe</p>
+          <p class="username">@johndoe</p>
+          <p class="bio">Someone's bio</p>
+        </div>
+        <div class="details my-1">
+          <span class="location"><i class="fas fa-map-marker-alt"></i> Someone's location</span>
+          <span><i class="fas fa-link"></i> <a href="github.com/matthewjhcarr">github.com/matthewjhcarr</a></span>
+          <span><i class="far fa-calendar-alt"></i> Joined July 2021</span>
+        </div>
+        <div class="socials">
+          <a href="#">
+            <i class="fab fa-youtube fa-2x"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-facebook fa-2x"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-linkedin fa-2x"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-instagram fa-2x"></i>
+          </a>
+        </div>
+        <div class="stats">
+          <ul>
+            <li><a href="#"><strong>69</strong> Following</a></li>
+            <li><a href="#"><strong>420</strong> Followers</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Tweets -->
+      <div class="profile-tweets">
+        <p>Tweets</p>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <a href="profile.html" class="clickable"><img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img"></a>
+          </div>
+          <div class="details">
+            <a href="profile.html" class="clickable">John Doe</a>
+            <span class="username">@johndoe</span>
+            <span class="date">21 Jul 2021</span>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <a href="tweet.html" class="main-link">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</a>
+          </div>
+          <div class="buttons">
+            <ul>
+              <li><i class="far fa-comment-alt"></i> 2</li>
+              <li><i class="fas fa-retweet"></i> 5</li>
+              <li><i class="far fa-heart"></i> 20</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img">
+          </div>
+          <div class="details">
+            <a href="#">John Doe</a>
+            <p class="username">@johndoe</p>
+            <p class="username">21 Jul 2021</p>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</p>
+          </div>
+        </div>
+      </div>
+      <!-- Tweets & replies -->
+      <div class="profile-tweets-replies">
+        <p>Tweets & replies</p>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <a href="profile.html" class="clickable"><img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img"></a>
+          </div>
+          <div class="details">
+            <a href="#">John Doe</a>
+            <p class="username">@johndoe</p>
+            <p class="username">21 Jul 2021</p>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</p>
+          </div>
+        </div>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img">
+          </div>
+          <div class="details">
+            <a href="#">John Doe</a>
+            <p class="username">@johndoe</p>
+            <p class="username">21 Jul 2021</p>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</p>
+          </div>
+        </div>
+      </div>
+      <!-- Likes -->
+      <div class="profile-likes">
+        <p>Likes</p>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img">
+          </div>
+          <div class="details">
+            <a href="#">John Doe</a>
+            <p class="username">@johndoe</p>
+            <p class="username">21 Jul 2021</p>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</p>
+          </div>
+        </div>
+        <div class="tweet p-1">
+          <div class="avatar">
+            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" class="round-img">
+          </div>
+          <div class="details">
+            <a href="#">John Doe</a>
+            <p class="username">@johndoe</p>
+            <p class="username">21 Jul 2021</p>
+          </div>
+          <div class="options"><i class="fas fa-ellipsis-h"></i></div>
+          <div class="text">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, hic!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- JavaScript imports -->
+  <script src="js/scripts.js"></script>
+</body>
+</html>

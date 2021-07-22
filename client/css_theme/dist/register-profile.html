@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.min.css">
+  <script src="https://kit.fontawesome.com/56b90b19d1.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Welcome to the Twitter Clone</title>
+</head>
+<body class="bg-dark">
+  <section class="login-container">
+    <!-- Alert -->
+    <div class="alert alert-danger">
+      Invalid Name
+    </div>
+    <h1 class="large text-primary">
+      <i class="fas fa-kiwi-bird"></i>
+    </h1>
+    <p class="lead"><i class="fas fa-user"></i> Create your profile</p>
+    <form action="dashboard.html" class="form">
+      <div class="form-group">
+        <input type="text" placeholder="Name" class="bg-dark" required>
+      </div>
+      <div class="form-group">
+        <textarea name="bio" id="bio" rows="5" placeholder="Bio" class="bg-dark"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Location" class="bg-dark">
+      </div>
+      <input type="submit" value="Create profile" class="btn btn-primary">
+    </form>
+  </section>
+</body>
+</html>
