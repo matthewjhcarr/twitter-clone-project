@@ -19,43 +19,43 @@ const Login = () => {
   }
 
   return (
-    <Fragment>
-      <section className="login-container">
-        <h1 className="large text-primary">
-          <i className="fas fa-kiwi-bird"></i>
+    <>
+      <section className='login-container'>
+        <h1 className='large text-primary'>
+          <i className='fas fa-kiwi-bird' />
         </h1>
-        <p className="lead">
-          <i className="fas fa-user"></i> Sign In to your account
+        <p className='lead'>
+          <i className='fas fa-user' /> Sign In to your account
         </p>
-        <form onSubmit={(e) => onSubmit(e)} className="form">
-          <div className="form-group">
+        <form onSubmit={(e) => onSubmit(e)} className='form'>
+          <div className='form-group'>
             <input
-              type="email"
-              placeholder="Email address"
-              name="email"
+              type='email'
+              placeholder='Email address'
+              name='email'
               value={email}
               onChange={(e) => onChange(e)}
               required
             />
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              minLength="6"
+              type='password'
+              placeholder='Password'
+              name='password'
+              minLength='6'
               value={password}
               onChange={(e) => onChange(e)}
               required
             />
           </div>
-          <input type="submit" value="Login" className="btn btn-primary" />
+          <input type='submit' value='Login' className='btn btn-primary' />
         </form>
-        <p className="my-1">
-          <Link to="/register">Sign up for TwitterClone</Link>
+        <p className='my-1'>
+          <Link to='/register'>Sign up for TwitterClone</Link>
         </p>
       </section>
-    </Fragment>
+    </>
   )
 }
 

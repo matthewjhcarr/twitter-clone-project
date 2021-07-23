@@ -24,58 +24,58 @@ const Register = () => {
   }
 
   return (
-    <Fragment>
-      <section className="login-container">
-        <h1 className="large text-primary">
-          <i className="fas fa-kiwi-bird"></i>
+    <>
+      <section className='login-container'>
+        <h1 className='large text-primary'>
+          <i className='fas fa-kiwi-bird' />
         </h1>
-        <p className="lead">
-          <i className="fas fa-user"></i> Create an account
+        <p className='lead'>
+          <i className='fas fa-user' /> Create an account
         </p>
-        <form className="form" onSubmit={(e) => onSubmit(e)}>
-          <div className="form-group">
+        <form className='form' onSubmit={(e) => onSubmit(e)}>
+          <div className='form-group'>
             <input
-              type="email"
-              placeholder="Email Address"
-              name="email"
+              type='email'
+              placeholder='Email Address'
+              name='email'
               value={email}
               onChange={(e) => onChange(e)}
               required
             />
-            <small className="form-text">
+            <small className='form-text'>
               This site uses Gravatar, so if you want a profile image, use a
               Gravatar email
             </small>
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              minLength="6"
+              type='password'
+              placeholder='Password'
+              name='password'
+              minLength='6'
               value={password}
               onChange={(e) => onChange(e)}
               required
             />
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              type="password"
-              placeholder="Confirm Password"
-              name="password2"
-              minLength="6"
+              type='password'
+              placeholder='Confirm Password'
+              name='password2'
+              minLength='6'
               value={password2}
               onChange={(e) => onChange(e)}
               required
             />
           </div>
-          <input type="submit" value="Register" className="btn btn-primary" />
+          <input type='submit' value='Register' className='btn btn-primary' />
         </form>
-        <p className="my-1">
-          Already have an account? <Link to="/login">Sign In</Link>
+        <p className='my-1'>
+          Already have an account? <Link to='/login'>Sign In</Link>
         </p>
       </section>
-    </Fragment>
+    </>
   )
 }
 
