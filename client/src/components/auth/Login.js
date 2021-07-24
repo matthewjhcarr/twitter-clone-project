@@ -19,40 +19,40 @@ const Login = () => {
   }
 
   return (
-    <Fragment>
-      <i className="large text-primary fas fa-kiwi-bird"></i>
-      <p className="lead">
-        <i className="lead fas fa-user"></i>
+    <>
+      <i className='large text-primary fas fa-kiwi-bird' />
+      <p className='lead'>
+        <i className='lead fas fa-user' />
         {' Sign In to your account'}
       </p>
-      <form onSubmit={onSubmit} className="form">
-        <div className="form-group">
+      <form onSubmit={onSubmit} className='form'>
+        <div className='form-group'>
           <input
-            type="email"
-            placeholder="Email address"
-            name="email"
+            type='email'
+            placeholder='Email address'
+            name='email'
             value={email}
             onChange={onChange}
             required
           />
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            minLength="6"
+            type='password'
+            placeholder='Password'
+            name='password'
+            minLength='6'
             value={password}
             onChange={onChange}
             required
           />
         </div>
-        <input type="submit" value="Login" className="btn btn-primary" />
+        <input type='submit' value='Login' className='btn btn-primary' />
       </form>
-      <NavLink to="/register" className="my-1">
+      <NavLink to='/register' className='my-1'>
         {'Sign up for TwitterClone'}
       </NavLink>
-    </Fragment>
+    </>
   )
 }
 

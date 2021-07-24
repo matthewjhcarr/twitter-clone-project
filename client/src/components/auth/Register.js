@@ -24,57 +24,57 @@ const Register = () => {
   }
 
   return (
-    <Fragment>
-      <i className="large text-primary fas fa-kiwi-bird"></i>
-      <p className="lead">
-        <i className="fas fa-user"></i>
+    <>
+      <i className='large text-primary fas fa-kiwi-bird' />
+      <p className='lead'>
+        <i className='fas fa-user' />
         {' Create an account'}
       </p>
-      <form className="form" onSubmit={onSubmit}>
-        <div className="form-group">
+      <form className='form' onSubmit={onSubmit}>
+        <div className='form-group'>
           <input
-            type="email"
-            placeholder="Email Address"
-            name="email"
+            type='email'
+            placeholder='Email Address'
+            name='email'
             value={email}
             onChange={onChange}
             required
           />
-          <small className="form-text">
+          <small className='form-text'>
             {
               'This site uses Gravatar, so if you want a profile image, use a Gravatar email'
             }
           </small>
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            minLength="6"
+            type='password'
+            placeholder='Password'
+            name='password'
+            minLength='6'
             value={password}
             onChange={onChange}
             required
           />
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            minLength="6"
+            type='password'
+            placeholder='Confirm Password'
+            name='password2'
+            minLength='6'
             value={password2}
             onChange={onChange}
             required
           />
         </div>
-        <input type="submit" value="Register" className="btn btn-primary" />
+        <input type='submit' value='Register' className='btn btn-primary' />
       </form>
-      <p className="my-1">
+      <p className='my-1'>
         {'Already have an account? '}
-        <NavLink to="/login">{'Sign In'}</NavLink>
+        <NavLink to='/login'>{'Sign In'}</NavLink>
       </p>
-    </Fragment>
+    </>
   )
 }
 
