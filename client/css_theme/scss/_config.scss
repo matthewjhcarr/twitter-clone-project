@@ -7,6 +7,7 @@ $border-color: #202327;
 $white-color: #fffcff;
 $grey-color: #6c757c;
 $max-width: 1100px;
+$body-font: 'Open Sans', sans serif;
 
 // Set text color based on background
 @function set-text-color($color) {

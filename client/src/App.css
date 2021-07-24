@@ -59,19 +59,19 @@
   padding: 5rem 0;
 }
 .container {
-  max-width: 1100px;
+  /* Original container settings. Using login-container settings for now to see if it works out */
+  /* max-width: 1100px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin: 0 5rem 3rem 15.6rem;
-}
-.login-container {
+  margin: 0 5rem 3rem 15.6rem; */
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   padding: 1rem;
+  color: #fff;
 }
 .x-large {
   font-size: 4rem;
@@ -254,6 +254,27 @@
   font-size: 1.2rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #04030f;
+  color: #fff;
+}
+.form input[type='text']:-webkit-autofill,
+.form input[type='email']:-webkit-autofill,
+.form input[type='password']:-webkit-autofill,
+.form input[type='date']:-webkit-autofill,
+.form select:-webkit-autofill,
+.form textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #04030f inset;
+  box-shadow: 0 0 0 1000px #04030f inset;
+  -webkit-text-fill-color: #fff;
+}
+.form input[type='text']:-webkit-autofill::first-line,
+.form input[type='email']:-webkit-autofill::first-line,
+.form input[type='password']:-webkit-autofill::first-line,
+.form input[type='date']:-webkit-autofill::first-line,
+.form select:-webkit-autofill::first-line,
+.form textarea:-webkit-autofill::first-line {
+  font-family: 'Open Sans', sans serif;
+  font-size: 1.2rem;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -267,6 +288,7 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+  background-color: #04030f;
 }
 a {
   text-decoration: none;
