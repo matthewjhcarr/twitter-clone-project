@@ -1,6 +1,6 @@
 import './App.css'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import React, { Fragment } from 'react'
+import React from 'react'
 import Footer from './components/layout/Footer'
 import Landing from './components/layout/Landing'
 import Login from './components/auth/Login'

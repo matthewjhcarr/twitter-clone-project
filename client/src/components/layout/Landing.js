@@ -8,9 +8,11 @@ const Landing = () => (
         <h1 className='x-large'>{'Join the conversation'}</h1>
         <p className='lead'>{'Sign up today.'}</p>
         <div className='buttons'>
+          {/* skipcq: JS-0394 */}
           <NavLink to='/register' className='btn btn-primary'>
             {'Sign Up'}
           </NavLink>
+          {/* skipcq: JS-0394 */}
           <NavLink to='/login' className='btn btn-dark'>
             {'Login'}
           </NavLink>

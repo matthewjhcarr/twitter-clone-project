@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -72,7 +72,7 @@ const Register = () => {
       </form>
       <p className='my-1'>
         {'Already have an account? '}
-        <NavLink to='/login'>{'Sign In'}</NavLink>
+        <Link to='/login'>{'Sign In'}</Link>
       </p>
     </>
   )

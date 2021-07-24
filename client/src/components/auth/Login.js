@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Login = () => {
@@ -49,6 +49,7 @@ const Login = () => {
         </div>
         <input type='submit' value='Login' className='btn btn-primary' />
       </form>
+      {/* skipcq: JS-0394 */}
       <NavLink to='/register' className='my-1'>
         {'Sign up for TwitterClone'}
       </NavLink>
