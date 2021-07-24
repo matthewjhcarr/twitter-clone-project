@@ -41,9 +41,7 @@ const Register = () => {
             required
           />
           <small className='form-text'>
-            {
-              'This site uses Gravatar, so if you want a profile image, use a Gravatar email'
-            }
+            This site uses Gravatar, so if you want a profile image, use a Gravatar email
           </small>
         </div>
         <div className='form-group'>
@@ -72,7 +70,7 @@ const Register = () => {
       </form>
       <p className='my-1'>
         {'Already have an account? '}
-        <NavLink to='/login'>{'Sign In'}</NavLink>
+        <NavLink to='/login'>Sign In</NavLink>
       </p>
     </>
   )

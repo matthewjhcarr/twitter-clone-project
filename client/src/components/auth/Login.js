@@ -50,7 +50,7 @@ const Login = () => {
         <input type='submit' value='Login' className='btn btn-primary' />
       </form>
       <NavLink to='/register' className='my-1'>
-        {'Sign up for TwitterClone'}
+        Sign up for TwitterClone
       </NavLink>
     </>
   )
