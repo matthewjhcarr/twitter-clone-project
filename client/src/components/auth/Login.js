@@ -51,7 +51,7 @@ const Login = () => {
       </form>
       {/* skipcq: JS-0394 */}
       <NavLink to='/register' className='my-1'>
-        {'Sign up for TwitterClone'}
+        Sign up for TwitterClone
       </NavLink>
     </>
   )
