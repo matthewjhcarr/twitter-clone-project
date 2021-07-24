@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-import Landing from './components/layout/Landing'
-import Footer from './components/layout/Footer'
 import './App.css'
-import Register from './components/auth/Register'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import React, { Fragment } from 'react'
+import Footer from './components/layout/Footer'
+import Landing from './components/layout/Landing'
 import Login from './components/auth/Login'
+import Navbar from './components/layout/Navbar'
+import Register from './components/auth/Register'
 
 const App = () => (
   <Router>
