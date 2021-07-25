@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import React from 'react'
+import { connect } from 'react-redux'
 
 // Pulls alerts out of props and defines layout for alert
 const Alert = ({ alerts }) =>
@@ -13,7 +13,7 @@ const Alert = ({ alerts }) =>
   ))
 
 Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = (state) => ({
