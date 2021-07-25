@@ -46,12 +46,6 @@ afterEach(async () => {
 })
 
 /**
- * Executed before all tests. Adds a test user to the database.
- * TODO: this method is a duplicate and should be combined with the first beforeAll()
- */
-beforeAll(async () => {})
-
-/**
  * Tests the user login endpoints.
  */
 describe('User login testing', () => {
