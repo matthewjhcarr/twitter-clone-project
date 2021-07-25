@@ -20,6 +20,15 @@ beforeAll(async () => {
     // Exit process with failure
     process.exit(ERROR_CODE)
   }
+
+  await request(server)
+    .post('/api/users')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: 'testuser',
+      email: 'testuser@gmail.com',
+      password: 'testpass123'
+    })
 })
 
 /**
@@ -34,21 +43,6 @@ afterAll(async () => {
  */
 afterEach(async () => {
   await User.deleteMany()
-})
-
-/**
- * Executed before all tests. Adds a test user to the database.
- * TODO: this method is a duplicate and should be combined with the first beforeAll()
- */
-beforeAll(async () => {
-  await request(server)
-    .post('/api/users')
-    .set('Content-Type', 'application/json')
-    .send({
-      name: 'Test User',
-      email: 'testuser@gmail.com',
-      password: 'testpass123'
-    })
 })
 
 /**
