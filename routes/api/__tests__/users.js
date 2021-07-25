@@ -51,11 +51,101 @@ describe('Registration testing', () => {
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
+        username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })
     expect(statusCode).toEqual(StatusCodes.OK)
     expect(body).toHaveProperty('token')
+  })
+
+  describe('Test username param', () => {
+    /**
+     * Tests the POST /api/users endpoint.
+     */
+    it('Should not create a test user without a username', async () => {
+      expect.assertions(5) // skipcq: JS-0074
+
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          email: 'testuser@gmail.com',
+          password: 'testpass123'
+        })
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please include a username')
+      expect(param).toEqual('username')
+      expect(location).toEqual('body')
+    })
+
+    /**
+     * Tests the POST /api/users endpoint.
+     */
+    it('Should not create a test user with a duplicate username', async () => {
+      expect.assertions(3) // skipcq: JS-0074
+
+      await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          username: 'testuser',
+          email: 'testuser@gmail.com',
+          password: 'testpass123'
+        })
+
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg }]
+        }
+      } = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          username: 'testuser',
+          email: 'testuser2@gmail.com',
+          password: 'testpass123'
+        })
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('User already exists')
+    })
+
+    /**
+     * Tests the POST /api/users endpoint.
+     */
+    it('Should not create a test user with an empty username', async () => {
+      expect.assertions(5) // skipcq: JS-0074
+
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg, param, location }]
+        }
+      } = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          username: '',
+          email: 'testuser@gmail.com',
+          password: 'testpass123'
+        })
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('Please include a username')
+      expect(param).toEqual('username')
+      expect(location).toEqual('body')
+    })
   })
 
   /**
@@ -78,6 +168,7 @@ describe('Registration testing', () => {
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
+          username: 'testuser',
           password: 'testpass123'
         })
       expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
@@ -85,6 +176,40 @@ describe('Registration testing', () => {
       expect(msg).toEqual('Please include a valid email')
       expect(param).toEqual('email')
       expect(location).toEqual('body')
+    })
+
+    /**
+     * Tests the POST /api/users endpoint.
+     */
+    it('Should not create a test user with a duplicate email', async () => {
+      expect.assertions(3) // skipcq: JS-0074
+
+      await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          username: 'testuser',
+          email: 'testuser@gmail.com',
+          password: 'testpass123'
+        })
+
+      const {
+        statusCode,
+        body,
+        body: {
+          errors: [{ msg }]
+        }
+      } = await request(server)
+        .post('/api/users')
+        .set('Content-Type', 'application/json')
+        .send({
+          username: 'testuser2',
+          email: 'testuser@gmail.com',
+          password: 'testpass123'
+        })
+      expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
+      expect(body).not.toHaveProperty('token')
+      expect(msg).toEqual('User already exists')
     })
 
     /**
@@ -103,6 +228,7 @@ describe('Registration testing', () => {
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
+          username: 'testuser',
           email: 'baduser',
           password: 'testpass123'
         })
@@ -134,6 +260,7 @@ describe('Registration testing', () => {
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
+          username: 'testuser',
           email: 'baduser@gmail.com'
         })
       expect(statusCode).toEqual(StatusCodes.BAD_REQUEST)
@@ -159,6 +286,7 @@ describe('Registration testing', () => {
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
+          username: 'testuser',
           email: 'baduser@gmail.com',
           password: '1234'
         })
@@ -187,6 +315,7 @@ describe('Delete user testing', () => {
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
+        username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })

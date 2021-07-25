@@ -44,6 +44,7 @@ beforeAll(async () => {
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
+        username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })
@@ -68,6 +69,7 @@ beforeAll(async () => {
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
+        username: 'testuser2',
         email: 'secondguy@gmail.com',
         password: 'testpass123'
       })

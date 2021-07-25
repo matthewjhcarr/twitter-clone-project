@@ -27,6 +27,10 @@ const ENCRYPTION_ROUNDS = 10
  *           schema:
  *             type: object
  *             properties:
+ *               username:
+ *                 type: string
+ *                 description: The user's chosen username
+ *                 example: testuser
  *               email:
  *                 type: string
  *                 description: The user's email address
@@ -77,6 +81,7 @@ const ENCRYPTION_ROUNDS = 10
 router.post(
   '/',
   [
+    check('username', 'Please include a username').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -92,11 +97,11 @@ router.post(
         .json({ errors: errors.array() })
     }
 
-    const { email, password } = req.body
+    const { username, email, password } = req.body
 
     try {
       // See if user exists
-      let user = await User.findOne({ email })
+      let user = await User.findOne({ $or: [{ username }, { email }] })
 
       if (user) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -115,6 +120,7 @@ router.post(
       })
 
       user = new User({
+        username,
         email,
         avatar,
         password

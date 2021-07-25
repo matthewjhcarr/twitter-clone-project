@@ -30,6 +30,7 @@ beforeAll(async () => {
       .post('/api/users')
       .set('Content-Type', 'application/json')
       .send({
+        username: 'testuser',
         email: 'testuser@gmail.com',
         password: 'testpass123'
       })
@@ -201,6 +202,7 @@ describe('Profile testing', () => {
         .post('/api/users')
         .set('Content-Type', 'application/json')
         .send({
+          username: 'testuser2',
           email: 'testuser2@gmail.com',
           password: 'testpass123'
         })
