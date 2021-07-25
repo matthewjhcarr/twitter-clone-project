@@ -23,7 +23,7 @@ const Register = ({ setAlert, register }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger')
     } else {
-      register({ username, email, password })
+      await register({ username, email, password })
     }
   }
 
