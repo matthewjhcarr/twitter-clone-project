@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { setAlert } from '../../actions/alert'
 import { connect } from 'react-redux'
+import { setAlert } from '../../actions/alert'
 
 const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
