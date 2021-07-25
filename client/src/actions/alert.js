@@ -5,16 +5,16 @@ const TIMEOUT = 5000
 
 export const setAlert =
   (msg, alertType, timeout = TIMEOUT) =>
-  (dispatch) => {
+    (dispatch) => {
     // Create alert id
-    const id = uuid()
+      const id = uuid()
 
-    // Send alert with message, alert type (colour), and id
-    dispatch({
-      type: SET_ALERT,
-      payload: { msg, alertType, id }
-    })
+      // Send alert with message, alert type (colour), and id
+      dispatch({
+        type: SET_ALERT,
+        payload: { msg, alertType, id }
+      })
 
-    // Dismiss alert after 5 seconds
-    setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout)
-  }
+      // Dismiss alert after 5 seconds
+      setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout)
+    }
