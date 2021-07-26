@@ -1,7 +1,10 @@
+import { NavLink, Redirect } from 'react-router-dom'
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { login } from '../../actions/auth'
 
-const Login = () => {
+const Login = ({ login, isAuthenticated = false }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -15,7 +18,11 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('success')
+    login(email, password)
+  }
+
+  if (isAuthenticated) {
+    return <Redirect to='/home' />
   }
 
   return (
@@ -23,7 +30,7 @@ const Login = () => {
       <i className='large text-primary fas fa-kiwi-bird' />
       <p className='lead'>
         <i className='lead fas fa-user' />
-        {' Sign In to your account'}
+        {' Sign in to your account'}
       </p>
       <form onSubmit={onSubmit} className='form'>
         <div className='form-group'>
@@ -33,7 +40,6 @@ const Login = () => {
             name='email'
             value={email}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -44,12 +50,10 @@ const Login = () => {
             minLength='6'
             value={password}
             onChange={onChange}
-            required
           />
         </div>
         <input type='submit' value='Login' className='btn btn-primary' />
       </form>
-      {/* skipcq: JS-0394 */}
       <NavLink to='/register' className='my-1'>
         Sign up for TwitterClone
       </NavLink>
@@ -57,4 +61,13 @@ const Login = () => {
   )
 }
 
-export default Login
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { login })(Login)
