@@ -6,7 +6,7 @@ import { logout } from '../../actions/auth'
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
-    <Fragment>
+    <>
       <li>
         <Link to='/home'>
           <i className='fas fa-home' /> Home
@@ -17,7 +17,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className='fas fa-sign-out-alt' /> Logout
         </Link>
       </li>
-    </Fragment>
+    </>
   )
 
   return (
@@ -27,7 +27,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className='fas fa-kiwi-bird' />
           {' TwitterClone'}
         </li>
-        {!loading && <Fragment>{isAuthenticated && authLinks}</Fragment>}
+        {!loading && <>{isAuthenticated && authLinks}</>}
       </ul>
     </nav>
   )
