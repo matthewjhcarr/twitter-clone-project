@@ -9,12 +9,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <Fragment>
       <li>
         <Link to='/home'>
-          <i class='fas fa-home' /> Home
+          <i className='fas fa-home' /> Home
         </Link>
       </li>
       <li>
         <Link to='#!' onClick={logout}>
-          <i class='fas fa-sign-out-alt' /> Logout
+          <i className='fas fa-sign-out-alt' /> Logout
         </Link>
       </li>
     </Fragment>

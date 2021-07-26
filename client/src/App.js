@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Alert from './components/layout/Alert'
 import Footer from './components/layout/Footer'
+import Home from './components/layout/Home'
 import Landing from './components/layout/Landing'
 import Login from './components/auth/Login'
 import Navbar from './components/layout/Navbar'
@@ -33,6 +34,7 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/home' component={Home} />
             </Switch>
           </section>
           <Footer />

@@ -30,7 +30,7 @@ const Login = ({ login, isAuthenticated }) => {
       <i className='large text-primary fas fa-kiwi-bird' />
       <p className='lead'>
         <i className='lead fas fa-user' />
-        {' Sign In to your account'}
+        {' Sign in to your account'}
       </p>
       <form onSubmit={onSubmit} className='form'>
         <div className='form-group'>
@@ -40,7 +40,6 @@ const Login = ({ login, isAuthenticated }) => {
             name='email'
             value={email}
             onChange={onChange}
-            required
           />
         </div>
         <div className='form-group'>
@@ -51,12 +50,10 @@ const Login = ({ login, isAuthenticated }) => {
             minLength='6'
             value={password}
             onChange={onChange}
-            required
           />
         </div>
         <input type='submit' value='Login' className='btn btn-primary' />
       </form>
-      {/* skipcq: JS-0394 */}
       <NavLink to='/register' className='my-1'>
         Sign up for TwitterClone
       </NavLink>
@@ -70,7 +67,7 @@ Login.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  iAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, { login })(Login)
