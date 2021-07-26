@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
 import { NavLink, Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { login } from '../../actions/auth'
 import { connect } from 'react-redux'
+import { login } from '../../actions/auth'
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated = false }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
