@@ -1,4 +1,5 @@
 import './App.css'
+import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Alert from './components/layout/Alert'
 import Footer from './components/layout/Footer'
@@ -6,11 +7,15 @@ import Landing from './components/layout/Landing'
 import Login from './components/auth/Login'
 import Navbar from './components/layout/Navbar'
 import { Provider } from 'react-redux'
-import React from 'react'
 import Register from './components/auth/Register'
 import { loadUser } from './actions/auth'
 import setAuthToken from './utils/setAuthToken'
 import store from './store'
+
+// If a token exists in local storage, add it to the header of every request
+if (localStorage.token) {
+  setAuthToken(localStorage.token)
+}
 
 const App = () => {
   useEffect(() => {
