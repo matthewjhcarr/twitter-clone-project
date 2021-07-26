@@ -9,7 +9,7 @@ const Navbar = ({
   logout
 }) => {
   const authLinks = (
-    <Fragment>
+    <>
       <li>
         <Link to='/home'>
           <i className='fas fa-home' /> Home
@@ -20,7 +20,7 @@ const Navbar = ({
           <i className='fas fa-sign-out-alt' /> Logout
         </Link>
       </li>
-    </Fragment>
+    </>
   )
 
   return (
@@ -30,7 +30,7 @@ const Navbar = ({
           <i className='fas fa-kiwi-bird' />
           {' TwitterClone'}
         </li>
-        {!loading && <Fragment>{isAuthenticated && authLinks}</Fragment>}
+        {!loading && <>{isAuthenticated && authLinks}</>}
       </ul>
     </nav>
   )
