@@ -60,18 +60,20 @@
 }
 .container {
   /* Original container settings. Using login-container settings for now to see if it works out */
-  /* max-width: 1100px;
+  max-width: 1100px;
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin: 0 5rem 3rem 15.6rem; */
-  position: absolute;
+  margin: 0 5rem 3rem 15rem;
+  color: #fff;
+  /* position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   padding: 1rem;
-  color: #fff;
+  background: #04030f;
+  padding: 0 4rem 3rem 4rem; */
 }
 .x-large {
   font-size: 4rem;
@@ -153,7 +155,8 @@
 }
 .btn.btn-dark {
   background-color: #04030f;
-  color: #fff;
+  border: 1px solid #247ba0;
+  color: #247ba0;
 }
 .btn.btn-dark:hover {
   background: #0a0724;
@@ -276,6 +279,36 @@
   font-family: 'Open Sans', sans serif;
   font-size: 1.2rem;
 }
+.form input[type='text']:focus,
+.form input[type='email']:focus,
+.form input[type='password']:focus,
+.form input[type='date']:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #247ba0;
+}
+.form .social-input {
+  display: flex;
+}
+.form .social-input i {
+  padding: 0.5rem;
+  width: 4rem;
+}
+.form .social-input i.fa-twitter {
+  color: #38a1f3;
+}
+.form .social-input i.fa-facebook {
+  color: #3b5998;
+}
+.form .social-input i.fa-instagram {
+  color: #3f729b;
+}
+.form .social-input i.fa-youtube {
+  color: #c4302b;
+}
+.form .social-input i.fa-linkedin {
+  color: #0077b5;
+}
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -357,10 +390,6 @@ img {
   -ms-flex-pack: center;
   justify-content: center;
   text-align: center;
-}
-.container {
-  background: #04030f;
-  padding: 0 8rem;
 }
 .footer {
   display: -webkit-box;
@@ -590,10 +619,13 @@ img {
   padding: 0 1rem 1rem 1rem;
   border: 1px solid #202327;
 }
-.tweet-form textarea {
-  border-style: none;
+.form-textarea {
   resize: none;
 }
-.tweet-form textarea:focus {
+.tweet-form .form-textarea {
+  border-style: none;
+}
+.tweet-form .form-textarea:focus {
   outline: none;
+  border-style: none;
 }
