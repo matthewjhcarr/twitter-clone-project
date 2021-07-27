@@ -1,5 +1,6 @@
 import {
   AUTH_ERROR,
+  CLEAR_PROFILE,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -32,40 +33,40 @@ export const loadUser = () => async (dispatch) => {
 
 export const register =
   ({ username, email, password }) =>
-    async (dispatch) => {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-
-      const body = JSON.stringify({ username, email, password })
-
-      try {
-        const res = await axios.post('/api/users', body, config)
-
-        dispatch({
-          type: REGISTER_SUCCESS,
-          payload: res.data
-        })
-
-        dispatch(loadUser())
-      } catch (err) {
-        const {
-          response: {
-            data: { errors }
-          }
-        } = err
-
-        if (errors) {
-          errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
-        }
-
-        dispatch({
-          type: REGISTER_FAIL
-        })
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
       }
     }
+
+    const body = JSON.stringify({ username, email, password })
+
+    try {
+      const res = await axios.post('/api/users', body, config)
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      })
+
+      dispatch(loadUser())
+    } catch (err) {
+      const {
+        response: {
+          data: { errors }
+        }
+      } = err
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+      }
+
+      dispatch({
+        type: REGISTER_FAIL
+      })
+    }
+  }
 
 export const login = (email, password) => async (dispatch) => {
   const config = {
@@ -103,5 +104,6 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE })
   dispatch({ type: LOGOUT })
 }

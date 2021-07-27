@@ -1,5 +1,6 @@
 import {
   AUTH_ERROR,
+  ACCOUNT_DELETED,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -15,7 +16,7 @@ const initialState = {
   user: null
 }
 
-export default function auth (state = initialState, action) {
+export default function auth(state = initialState, action) {
   const { type, payload } = action
 
   switch (type) {
@@ -36,6 +37,7 @@ export default function auth (state = initialState, action) {
         loading: false
       }
     case AUTH_ERROR:
+    case ACCOUNT_DELETED:
     case LOGIN_FAIL:
     case LOGOUT:
     case REGISTER_FAIL:
