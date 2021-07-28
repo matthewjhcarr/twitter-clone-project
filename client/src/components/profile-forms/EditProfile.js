@@ -62,10 +62,10 @@ const EditProfile = ({
   return (
     <>
       <h1 className='large text-primary'>
-        <i className='fas fa-kiwi-bird'></i>
+        <i className='fas fa-kiwi-bird' />
       </h1>
       <p className='lead'>
-        <i className='fas fa-user'></i> Update your profile
+        <i className='fas fa-user' /> Update your profile
       </p>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
@@ -124,7 +124,7 @@ const EditProfile = ({
         {displaySocialInputs && (
           <>
             <div className='form-group social-input'>
-              <i className='fab fa-facebook fa-2x'></i>
+              <i className='fab fa-facebook fa-2x' />
               <input
                 type='text'
                 placeholder='Facebook URL'
@@ -135,7 +135,7 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-youtube fa-2x'></i>
+              <i className='fab fa-youtube fa-2x' />
               <input
                 type='text'
                 placeholder='YouTube URL'
@@ -146,7 +146,7 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-linkedin fa-2x'></i>
+              <i className='fab fa-linkedin fa-2x' />
               <input
                 type='text'
                 placeholder='Linkedin URL'
@@ -157,7 +157,7 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-instagram fa-2x'></i>
+              <i className='fab fa-instagram fa-2x' />
               <input
                 type='text'
                 placeholder='Instagram URL'

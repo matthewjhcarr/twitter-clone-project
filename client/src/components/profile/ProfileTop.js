@@ -32,7 +32,7 @@ const ProfileTop = ({
               className='btn btn-danger'
               onClick={() => deleteAccount(history)}
             >
-              <i className='fas fa-user-minus'></i> Delete My Account
+              <i className='fas fa-user-minus' /> Delete My Account
             </button>
           </li>
         </ul>
@@ -45,36 +45,36 @@ const ProfileTop = ({
       </div>
       <div className='details my-1'>
         <span className='location'>
-          <i className='fas fa-map-marker-alt'></i> {location}
+          <i className='fas fa-map-marker-alt' /> {location}
         </span>
         {website && (
           <span>
-            <i className='fas fa-link'></i> <Link to={website}>{website}</Link>
+            <i className='fas fa-link' /> <Link to={website}>{website}</Link>
           </span>
         )}
         <span>
-          <i className='far fa-calendar-alt'></i> Joined {date}
+          <i className='far fa-calendar-alt' /> Joined {date}
         </span>
       </div>
       <div className='socials'>
         {social && social.youtube && (
           <a href={social.youtube} target='_blank' rel='noopener noreferrer'>
-            <i className='fab fa-youtube fa-2x'></i>
+            <i className='fab fa-youtube fa-2x' />
           </a>
         )}
         {social && social.facebook && (
           <a href={social.facebook} target='_blank' rel='noopener noreferrer'>
-            <i className='fab fa-facebook fa-2x'></i>
+            <i className='fab fa-facebook fa-2x' />
           </a>
         )}
         {social && social.linkedin && (
           <a href={social.linkedin} target='_blank' rel='noopener noreferrer'>
-            <i className='fab fa-linkedin fa-2x'></i>
+            <i className='fab fa-linkedin fa-2x' />
           </a>
         )}
         {social && social.instagram && (
           <a href={social.instagram} target='_blank' rel='noopener noreferrer'>
-            <i className='fab fa-instagram fa-2x'></i>
+            <i className='fab fa-instagram fa-2x' />
           </a>
         )}
       </div>

@@ -10,17 +10,17 @@ const Profile = ({ getProfileById, profile: { profile, loading }, match }) => {
     getProfileById(match.params.id)
   }, [getProfileById, match.params.id])
   return (
-    <Fragment>
+    <>
       {profile === null || loading ? (
         <Spinner />
       ) : (
-        <Fragment>
+        <>
           <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
           </div>
-        </Fragment>
+        </>
       )}
-    </Fragment>
+    </>
   )
 }
 
