@@ -41,9 +41,9 @@ Profiles.propTypes = {
       PropTypes.shape({
         _id: PropTypes.string.isRequired
       })
-    ).isRequired
-  }).isRequired,
-  loading: PropTypes.bool.isRequired
+    ).isRequired,
+    loading: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => ({
