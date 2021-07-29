@@ -14,17 +14,13 @@ const ProfileTop = ({
     social,
     user: { _id: userId, username, avatar, date }
   },
-  auth: {
-    isAuthenticated = false,
-    loading,
-    user: { _id: authUserId }
-  },
+  auth: { isAuthenticated = false, loading, user: authUser },
   history
 }) => {
   return (
     <div className='profile-top p-2'>
       <img src={avatar} alt='' className='round-img' />
-      {isAuthenticated && !loading && authUserId === userId && (
+      {isAuthenticated && !loading && authUser._id === userId && (
         <ul>
           <li>
             <NavLink to='/edit-profile' className='btn btn-primary'>

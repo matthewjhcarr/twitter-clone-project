@@ -20,7 +20,7 @@ const Footer = () => (
         <Link to='#'>The developer</Link>
       </li>
       <li>
-        <Link to='#'>Directory</Link>
+        <Link to='/directory'>Directory</Link>
       </li>
       <li>
         <Link to='#'>Settings</Link>
