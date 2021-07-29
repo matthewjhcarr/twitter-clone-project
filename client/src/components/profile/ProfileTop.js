@@ -122,6 +122,9 @@ ProfileTop.propTypes = {
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired
     })
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
   }).isRequired
 }
 
