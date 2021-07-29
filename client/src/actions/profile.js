@@ -55,10 +55,9 @@ export const createProfile =
 
         const res = await axios.post('/api/profile', formData, config)
 
-        // TODO should redirect to previous page
-        // if (edit) {
-        //   history.push('/prevpage')
-        // }
+        if (edit) {
+          history.goBack()
+        }
 
         history.push('/home')
 
