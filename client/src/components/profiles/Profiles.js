@@ -42,7 +42,8 @@ Profiles.propTypes = {
         _id: PropTypes.string.isRequired
       })
     ).isRequired
-  }).isRequired
+  }).isRequired,
+  loading: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({
