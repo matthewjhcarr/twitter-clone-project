@@ -1,5 +1,6 @@
 import {
   AUTH_ERROR,
+  CLEAR_PROFILE,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
@@ -103,5 +104,6 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE })
   dispatch({ type: LOGOUT })
 }

@@ -1,4 +1,5 @@
 import {
+  ACCOUNT_DELETED,
   AUTH_ERROR,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -36,6 +37,7 @@ export default function auth (state = initialState, action) {
         loading: false
       }
     case AUTH_ERROR:
+    case ACCOUNT_DELETED:
     case LOGIN_FAIL:
     case LOGOUT:
     case REGISTER_FAIL:

@@ -363,7 +363,7 @@ router.get('/user/:user_id', async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id
-    }).populate('user', ['name', 'avatar'])
+    }).populate('user', ['username', 'avatar', 'date'])
 
     if (!profile) {
       return res
