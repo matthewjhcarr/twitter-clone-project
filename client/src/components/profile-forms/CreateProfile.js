@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
 import { connect } from 'react-redux'
-import { createProfile } from '../../actions/profile'
+import { createProfile, getCurrentProfile } from '../../actions/profile'
 import { withRouter } from 'react-router'
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({
+  profile: { profile, loading },
+  getCurrentProfile,
+  createProfile,
+  history
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     bio: '',
@@ -18,6 +24,14 @@ const CreateProfile = ({ createProfile, history }) => {
   })
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false)
+
+  useEffect(() => {
+    getCurrentProfile()
+  }, [getCurrentProfile])
+
+  if (profile) {
+    return <Redirect to='/home' />
+  }
 
   const {
     name,
@@ -166,5 +180,11 @@ CreateProfile.propTypes = {
   }).isRequired
 }
 
+const mapStateToProps = (state) => ({
+  profile: state.profile
+})
+
 // CreateProfile is wrapped by withRouter() to allow us to pass in a history object and use it from the action
-export default connect(null, { createProfile })(withRouter(CreateProfile))
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
+  withRouter(CreateProfile)
+)
