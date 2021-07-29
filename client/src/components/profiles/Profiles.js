@@ -15,7 +15,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   ) : (
     <>
       <h1 className='large text-primary'>
-        <i className='fas fa-users'></i> Profiles
+        <i className='fas fa-users' /> Profiles
       </h1>
       <p className='lead'>
         Welcome to the profile index! Here you can find every person&apos;s
