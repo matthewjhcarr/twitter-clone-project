@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { createProfile, getCurrentProfile } from '../../actions/profile'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
 import { connect } from 'react-redux'
-import { createProfile, getCurrentProfile } from '../../actions/profile'
 import { withRouter } from 'react-router'
 
 const CreateProfile = ({
-  profile: { profile, loading },
+  profile: { profile },
   getCurrentProfile,
   createProfile,
   history
@@ -173,6 +173,28 @@ const CreateProfile = ({
 }
 
 CreateProfile.propTypes = {
+  profile: PropTypes.shape({
+    profile: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      user: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        avatar: PropTypes.string.isRequired
+      }).isRequired,
+      name: PropTypes.string.isRequired,
+      bio: PropTypes.string,
+      location: PropTypes.string,
+      website: PropTypes.string,
+      social: PropTypes.shape({
+        youtube: PropTypes.string,
+        instagram: PropTypes.string,
+        linkedin: PropTypes.string,
+        facebook: PropTypes.string
+      }),
+      date: PropTypes.string.isRequired
+    })
+  }).isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   createProfile: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

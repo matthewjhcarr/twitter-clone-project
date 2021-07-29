@@ -18,8 +18,8 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <i className='fas fa-users'></i> Profiles
       </h1>
       <p className='lead'>
-        Welcome to the profile index! Here you can find every person's profile,
-        for some reason. Kind of like the Yellow Pages
+        Welcome to the profile index! Here you can find every person&apos;s
+        profile, for some reason. Kind of like the Yellow Pages
       </p>
       <div className='profiles'>
         {profiles.length > 0 ? (
@@ -36,7 +36,13 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
 
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.shape({
+    profiles: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired
+      })
+    ).isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => ({
