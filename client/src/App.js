@@ -11,6 +11,7 @@ import Login from './components/auth/Login'
 import Navbar from './components/layout/Navbar'
 import PrivateRoute from './components/routing/PrivateRoute'
 import Profile from './components/profile/Profile'
+import Profiles from './components/profiles/Profiles'
 import { Provider } from 'react-redux'
 import Register from './components/auth/Register'
 import { loadUser } from './actions/auth'
@@ -39,6 +40,7 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/profile/:id' component={Profile} />
+              <Route exact path='/directory' component={Profiles} />
               <PrivateRoute exact path='/home' component={Home} />
               <PrivateRoute
                 exact
