@@ -45,50 +45,50 @@ export const getProfileById = (userId) => async (dispatch) => {
 
 export const createProfile =
   (formData, history, edit = false) =>
-  async (dispatch) => {
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
+    async (dispatch) => {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }
 
-      const res = await axios.post('/api/profile', formData, config)
+        const res = await axios.post('/api/profile', formData, config)
 
-      // TODO should redirect to previous page
-      // if (edit) {
-      //   history.push('/prevpage')
-      // }
+        // TODO should redirect to previous page
+        // if (edit) {
+        //   history.push('/prevpage')
+        // }
 
-      history.push('/home')
+        history.push('/home')
 
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      })
+        dispatch({
+          type: GET_PROFILE,
+          payload: res.data
+        })
 
-      dispatch(
-        setAlert(edit ? 'Profile updated' : 'Profile created', 'success')
-      )
-    } catch (err) {
-      const {
-        response: {
-          data: { errors },
-          status,
-          statusText
+        dispatch(
+          setAlert(edit ? 'Profile updated' : 'Profile created', 'success')
+        )
+      } catch (err) {
+        const {
+          response: {
+            data: { errors },
+            status,
+            statusText
+          }
+        } = err
+
+        if (errors) {
+          errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
         }
-      } = err
 
-      if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+        dispatch({
+          type: PROFILE_ERROR,
+          payload: { msg: statusText, status }
+        })
       }
-
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: { msg: statusText, status }
-      })
     }
-  }
 
 // Delete account & profile
 export const deleteAccount = (history) => async (dispatch) => {
