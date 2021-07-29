@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../../actions/auth'
 
@@ -52,7 +52,7 @@ const Navbar = ({
           <i className='fas fa-kiwi-bird' />
           {' TwitterClone'}
         </li>
-        {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
+        {!loading && isAuthenticated ? authLinks : guestLinks}
       </ul>
     </nav>
   )

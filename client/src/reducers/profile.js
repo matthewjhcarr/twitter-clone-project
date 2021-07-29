@@ -8,7 +8,7 @@ const initialState = {
   error: {}
 }
 
-export default function profile (state = initialState, action) {
+export default function profile(action, state = initialState) {
   const { type, payload } = action
 
   switch (type) {

@@ -159,7 +159,10 @@ const CreateProfile = ({ createProfile, history }) => {
 }
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 }
 
 // CreateProfile is wrapped by withRouter() to allow us to pass in a history object and use it from the action

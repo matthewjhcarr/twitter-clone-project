@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { createProfile, getCurrentProfile } from '../../actions/profile'
 import PropTypes from 'prop-types'
 import TextareaAutosize from 'react-textarea-autosize'
 import { connect } from 'react-redux'
-import { createProfile, getCurrentProfile } from '../../actions/profile'
 
 const EditProfile = ({
   profile: { profile, loading },
@@ -183,9 +183,21 @@ const EditProfile = ({
 }
 
 EditProfile.propTypes = {
+  profile: PropTypes.shape({
+    profile: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      bio: PropTypes.string,
+      location: PropTypes.string,
+      website: PropTypes.string,
+      social: PropTypes.arrayOf(PropTypes.string)
+    }).isRequired,
+    loading: PropTypes.bool.isRequired
+  }).isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => ({

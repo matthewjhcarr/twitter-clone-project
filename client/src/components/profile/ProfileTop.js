@@ -1,6 +1,6 @@
-import React from 'react'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import React from 'react'
 import { connect } from 'react-redux'
 import { deleteAccount } from '../../actions/profile'
 
@@ -12,25 +12,30 @@ const ProfileTop = ({
     location,
     website,
     social,
-    user: { _id, username, avatar, date }
+    user: { _id: userId, username, avatar, date }
   },
-  auth,
+  auth: {
+    isAuthenticated = false,
+    loading,
+    user: { _id: authUserId }
+  },
   history
 }) => {
   return (
     <div className='profile-top p-2'>
       <img src={avatar} alt='' className='round-img' />
-      {auth.isAuthenticated && !auth.loading && auth.user._id === _id && (
+      {isAuthenticated && !loading && authUserId === userId && (
         <ul>
           <li>
-            <Link to='/edit-profile' className='btn btn-primary'>
+            <NavLink to='/edit-profile' className='btn btn-primary'>
               Edit Profile
-            </Link>
+            </NavLink>
           </li>
           <li>
             <button
               className='btn btn-danger'
               onClick={() => deleteAccount(history)}
+              type='button'
             >
               <i className='fas fa-user-minus' /> Delete My Account
             </button>
@@ -98,7 +103,26 @@ const ProfileTop = ({
 
 ProfileTop.propTypes = {
   deleteAccount: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    location: PropTypes.string,
+    website: PropTypes.string,
+    social: PropTypes.arrayOf(PropTypes.string),
+    user: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.shape({
+      _id: PropTypes.string.isRequired
+    })
+  }).isRequired
 }
 
 const mapStateToProps = (state) => ({
